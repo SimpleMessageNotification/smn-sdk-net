@@ -3,9 +3,3 @@
 smn的使用说明请查阅[SMN的SDK使用说明](https://github.com/SimpleMessageNotification/smn-sdk-net/wiki)  
   
 Welcome to use the SMN Services C# SDK. SMN Services The C# SDK simplifies the complexity of your use of SMN services. Here's how to use the C# SDK and start calling. smn instructions for use, please refer to [SMN's SDK instructions](https://github.com/SimpleMessageNotification/smn-sdk-net/wiki)
-
-
-+ 定义SDK结构
-+ 实现短信发送接口
-+ 实现example项目，验证通过
-+ 编写wiki https://github.com/SimpleMessageNotification/smn-sdk-net/wiki
