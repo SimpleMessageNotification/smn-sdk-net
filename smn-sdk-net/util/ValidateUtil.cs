@@ -15,7 +15,6 @@ namespace Smn.Util
     {
         private const string PATTERN_TELTPHONE = "^\\+?[0-9]{1,31}";
 
-
         /// <summary>
         /// validate phone
         /// </summary>

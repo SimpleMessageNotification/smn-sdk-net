@@ -21,7 +21,6 @@ namespace Smn.Response.Sms
     [DataContract]
     public class SmsPublishResponse : BaseResponse
     {
-
         /// <summary>
         /// message id
         /// </summary>

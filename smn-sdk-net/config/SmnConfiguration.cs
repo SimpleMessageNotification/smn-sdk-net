@@ -29,7 +29,6 @@ namespace Smn.Config
         public string Password { get => password; set => password = value; }
         public string RegionName { get => regionName; set => regionName = value; }
 
-
         /// <summary>
         /// return user agent
         /// </summary>

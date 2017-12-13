@@ -27,18 +27,15 @@ namespace Smn.Request.Sms
     [DataContract]
     public class SmsPublishRequest : AbstractRequest<SmsPublishResponse>
     {
-
         /// <summary>
         /// message access point
         /// </summary>
         private String endpoint;
 
-
         /// <summary>
         /// message to send
         /// </summary>
         private String message;
-
 
         /// <summary>
         /// message signature id

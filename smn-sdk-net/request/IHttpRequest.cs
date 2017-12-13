@@ -22,7 +22,6 @@ namespace Smn.Request
     ///</summary> 
     interface IHttpRequest
     {
-
         /// <summary>
         /// get the request http method
         /// </summary>
@@ -34,7 +33,6 @@ namespace Smn.Request
         /// </summary>
         /// <returns>timeout</returns>
         int? GetTimeout();
-
 
         /// <summary>
         /// get the url of the request
@@ -48,13 +46,11 @@ namespace Smn.Request
         /// <returns>body parms</returns>
         string GetBodyParams();
 
-
         /// <summary>
         /// get the request user agent info
         /// </summary>
         /// <returns>user agen</returns>
         string GetUserAgent();
-
 
         /// <summary>
         /// get the content type of the request
@@ -62,20 +58,17 @@ namespace Smn.Request
         /// <returns>content type</returns>
         string GetContentType();
 
-
         /// <summary>
         /// get the encoding of the request
         /// </summary>
         /// <returns>encoding</returns>
         Encoding GetRequestEncoding();
 
-
         /// <summary>
         /// get the headers of the request
         /// </summary>
         /// <returns>header</returns>
         IDictionary<string, string> GetHeaders();
-
 
         /// <summary>
         /// add header to request

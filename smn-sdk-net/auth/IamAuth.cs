@@ -40,12 +40,10 @@ namespace Smn.Auth
         public long ExpiresTime { get => expiresTime; set => expiresTime = value; }
         public SmnConfiguration SmnConfiguration { get => smnConfiguration; set => smnConfiguration = value; }
 
-
         /// <summary>
         /// locker
         /// </summary>
         private static readonly object locker = new object();
-
 
         /// <summary>
         /// get user projectId and token

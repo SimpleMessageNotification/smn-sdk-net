@@ -45,7 +45,6 @@ namespace Smn.Util
             }
         }
 
-
         /// <summary>
         ///Serialize the object to JSON string
         /// </summary>
@@ -70,7 +69,6 @@ namespace Smn.Util
                 throw e;
             }
         }
-
 
         /// <summary>
         /// UnSerialize JSON strings to object

@@ -26,7 +26,6 @@ namespace Smn.Http
     ///</summary> 
     class HttpTool
     {
-
         /// <summary>
         /// send httpRequest and get response
         /// </summary>
@@ -56,7 +55,6 @@ namespace Smn.Http
             request.ContentType = httpRequest.GetContentType();
             request.UserAgent = httpRequest.GetUserAgent();
 
-
             if (httpRequest.GetTimeout().HasValue)
             {
                 request.Timeout = httpRequest.GetTimeout().Value;
@@ -73,7 +71,6 @@ namespace Smn.Http
             #endregion add header
 
             #region post json
-            string jsonstr = httpRequest.GetBodyParams();
             if (!string.IsNullOrEmpty(httpRequest.GetBodyParams()))
             {
                 using (var streamWriter = new StreamWriter(request.GetRequestStream()))

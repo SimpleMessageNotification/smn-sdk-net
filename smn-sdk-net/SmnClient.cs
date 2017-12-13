@@ -20,6 +20,11 @@ using System;
 
 namespace Smn
 {
+    ///<summary> 
+    ///smn client
+    /// author:zhangyx
+    /// version:1.0.0
+    ///</summary> 
     public class SmnClient
     {
         private SmnConfiguration smnConfiguration;
@@ -47,7 +52,6 @@ namespace Smn
                 SmnConfiguration = smnConfiguration
             };
         }
-
 
         /// <summary>
         ///  send the request

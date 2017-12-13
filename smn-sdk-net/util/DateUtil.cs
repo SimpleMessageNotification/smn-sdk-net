@@ -21,7 +21,6 @@ namespace Smn.Util
     ///</summary> 
     class DateUtil
     {
-
         /// <summary>
         /// convert date string to datetime by utc zone
         /// </summary>
