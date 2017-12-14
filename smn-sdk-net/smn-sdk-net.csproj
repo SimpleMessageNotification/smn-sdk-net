@@ -42,7 +42,6 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -54,9 +53,15 @@
     <Compile Include="request\AbstractRequest.cs" />
     <Compile Include="request\IamRequest.cs" />
     <Compile Include="request\IHttpRequest.cs" />
+    <Compile Include="request\sms\DeleteSmsSignRequest.cs" />
+    <Compile Include="request\sms\ListSmsMsgReportRequest.cs" />
+    <Compile Include="request\sms\ListSmsSignsRequest.cs" />
     <Compile Include="request\sms\SmsPublishRequest.cs" />
     <Compile Include="response\BaseResponse.cs" />
     <Compile Include="response\IamRepsonse.cs" />
+    <Compile Include="response\sms\DeleteSmsSignResponse.cs" />
+    <Compile Include="response\sms\ListSmsMsgReportResponse.cs" />
+    <Compile Include="response\sms\ListSmsSignsResponse.cs" />
     <Compile Include="response\sms\SmsPublishResponse.cs" />
     <Compile Include="SmnClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

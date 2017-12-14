@@ -32,5 +32,7 @@ namespace Smn.Util
         public const string EXPIRES_AT = "expires_at";
         public const string SMN_NOTIFICATIONS = "notifications";
         public const string SMN_SUB_PROTOCOL_SMS = "sms";
+        public const string SMN_SIGN = "sms_sign";
+        public const string SMS_REPORT = "report";
     }
 }

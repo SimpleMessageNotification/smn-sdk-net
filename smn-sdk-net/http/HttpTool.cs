@@ -51,7 +51,8 @@ namespace Smn.Http
                 request = WebRequest.Create(url) as HttpWebRequest;
             }
 
-            request.Method = httpRequest.GetHttpMethod().ToString();
+            HttpMethod httpMethod = httpRequest.GetHttpMethod();
+            request.Method = httpMethod.ToString();
             request.ContentType = httpRequest.GetContentType();
             request.UserAgent = httpRequest.GetUserAgent();
 
@@ -71,7 +72,8 @@ namespace Smn.Http
             #endregion add header
 
             #region post json
-            if (!string.IsNullOrEmpty(httpRequest.GetBodyParams()))
+            if ((httpMethod == HttpMethod.POST || httpMethod == HttpMethod.PUT)
+                && !string.IsNullOrEmpty(httpRequest.GetBodyParams()))
             {
                 using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                 {
