@@ -17,6 +17,8 @@ using Smn.Http;
 using Smn.Util;
 using System.Net;
 using Smn.Response;
+using System.Reflection;
+using System;
 
 namespace Smn.Request
 {
@@ -26,7 +28,7 @@ namespace Smn.Request
     /// version:1.0.0
     ///</summary> 
     [DataContract]
-    public abstract class AbstractRequest<T> : IHttpRequest where T: BaseResponse
+    public abstract class AbstractRequest<T> : IHttpRequest where T : BaseResponse
     {
         private SmnConfiguration smnConfiguration;
         private string projectId;
@@ -63,9 +65,16 @@ namespace Smn.Request
 
         public abstract HttpMethod GetHttpMethod();
 
-        public abstract int? GetTimeout();
-
         public abstract string GetUrl();
+
+        /// <summary>
+        /// User defined parameters, if not set back to null
+        /// </summary>
+        /// <returns>timeout</returns>
+        public int? GetTimeout()
+        {
+            return null;
+        }
 
         public virtual string GetBodyParams()
         {
@@ -73,7 +82,7 @@ namespace Smn.Request
         }
 
         //public abstract T GetResponse(HttpWebResponse response);
-        public  T GetResponse(HttpWebResponse response)
+        public T GetResponse(HttpWebResponse response)
         {
             string responseMessage = HttpTool.GetStream(response, Encoding.UTF8);
             T smsPublishResponse = JsonUtil.UnSerialize<T>(responseMessage);
@@ -95,6 +104,60 @@ namespace Smn.Request
         public void SetProjectId(string projectId)
         {
             this.projectId = projectId;
+        }
+
+        /// <summary>
+        /// obtain get method query Parameters
+        /// </summary>
+        /// <param name="obj">object</param>
+        /// <returns>parameters</returns>
+        public string GetQueryParameters(Object obj)
+        {
+            StringBuilder sb = new StringBuilder();
+            Type t = obj.GetType();
+            PropertyInfo[] pi = t.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+            foreach (PropertyInfo p in pi)
+            {
+                MethodInfo mi = p.GetGetMethod();
+                if (mi == null || !mi.IsPublic)
+                {
+                    continue;
+                }
+
+                object[] attributes = p.GetCustomAttributes(typeof(DataMemberAttribute), true);
+                DataMemberAttribute dataMemberAttribute = null;
+                if (attributes == null || attributes.Length == 0)
+                {
+                    continue;
+                }
+                foreach (object a in attributes)
+                {
+                    if (typeof(DataMemberAttribute) == a.GetType())
+                    {
+                        dataMemberAttribute = (DataMemberAttribute)a;
+                    }
+                }
+                if (dataMemberAttribute == null)
+                {
+                    continue;
+                }
+
+                object value = mi.Invoke(obj, new Object[] { });
+                if (value == null || string.IsNullOrEmpty(Convert.ToString(value)))
+                {
+                    continue;
+                }
+
+                sb.Append(dataMemberAttribute.Name).Append("=").Append(Convert.ToString(value)).Append("&");
+            }
+
+            int strIndex = sb.Length;
+            if (!string.IsNullOrEmpty(sb.ToString()))
+            {
+                sb.Remove(strIndex - 1, 1);
+            }
+            return sb.ToString();
         }
     }
 }

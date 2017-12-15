@@ -9,7 +9,6 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * Apache License, Version 2.0 for more details.
  */
-using System.Net;
 using System.Runtime.Serialization;
 using Smn.Http;
 using Smn.Response;
@@ -33,11 +32,6 @@ namespace Smn.Request
         public override string GetBodyParams()
         {
             return GetRequestMessage();
-        }
-
-        public override int? GetTimeout()
-        {
-            return null;
         }
 
         public override string GetUrl()
