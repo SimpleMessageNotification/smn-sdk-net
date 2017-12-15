@@ -2,6 +2,7 @@
 using Smn.Request.Sms;
 using Smn.Response.Sms;
 using System;
+using System.Collections.Generic;
 
 namespace Smn.Example
 {
@@ -23,8 +24,14 @@ namespace Smn.Example
             ListSmsSigns();
             // delete sms sign
             DeleteSmsSign();
-            // list sms msg report
+            //    // list sms msg report
             ListSmsMsgReport();
+            // get sended sms messsage content
+            GetSmsMessage();
+            //list sms event
+            ListSmsEvent();
+            //update sms event
+            UpdateSmsEvent();
         }
 
         /// <summary>
@@ -47,6 +54,7 @@ namespace Smn.Example
                 SmsPublishResponse response = smnClient.SendRequest(request);
                 string result = response.MessageId;
                 Console.WriteLine("{0}", result);
+                Console.ReadLine();
             }
             catch (Exception e)
             {
@@ -110,7 +118,7 @@ namespace Smn.Example
             {
                 StartTime = "1512625955366",
                 EndTime = "1512712355850",
-                SignId = "6be340e91e5241e4b5d85837e6709104",
+                Limit = 99,
             };
             try
             {
@@ -118,6 +126,85 @@ namespace Smn.Example
                 ListSmsMsgReportResponse response = smnClient.SendRequest(request);
                 Console.WriteLine("{0}", response.Count);
                 Console.WriteLine("{0}", response.Data.Count);
+                Console.ReadLine();
+            }
+            catch (Exception e)
+            {
+                // 处理异常
+                Console.WriteLine("{0}", e.Message);
+            }
+        }
+
+        /// <summary>
+        /// 查询已发送短信的内容
+        /// </summary>
+        public static void GetSmsMessage()
+        {
+            // 设置请求对象
+            GetSmsMessageRequest request = new GetSmsMessageRequest
+            {
+                MessageId = "c90c791e54dd4c987c63b250982",
+            };
+            try
+            {
+                // 发送请求并返回响应
+                GetSmsMessageResponse response = smnClient.SendRequest(request);
+                Console.WriteLine("{0}", response.Message);
+                Console.ReadLine();
+            }
+            catch (Exception e)
+            {
+                // 处理异常
+                Console.WriteLine("{0}", e.Message);
+            }
+        }
+
+        /// <summary>
+        /// 查询短信回调事件
+        /// </summary>
+        public static void ListSmsEvent()
+        {
+            // 设置请求对象
+            ListSmsEventRequest request = new ListSmsEventRequest
+            {
+                EventType = "sms_fail_event",
+            };
+            try
+            {
+                // 发送请求并返回响应
+                ListSmsEventResponse response = smnClient.SendRequest(request);
+                Console.WriteLine("{0}", response.Callback);
+                Console.ReadLine();
+            }
+            catch (Exception e)
+            {
+                // 处理异常
+                Console.WriteLine("{0}", e.Message);
+            }
+        }
+
+        /// <summary>
+        /// 更新短信回调事件
+        /// </summary>
+        public static void UpdateSmsEvent()
+        {
+            SmsCallbackRequestData successCallbackData = new SmsCallbackRequestData
+            {
+                EventType = "sms_success_event",
+                TopicUrn = "urn:smn:cn-north-1:cffe4fc4c9a54219b60dbaf7b586e132:sms_event_urn",
+            };
+            List<SmsCallbackRequestData> listSmsEvents = new List<SmsCallbackRequestData>();
+            listSmsEvents.Add(successCallbackData);
+            // 设置请求对象
+            UpdateSmsEventRequest request = new UpdateSmsEventRequest
+            {
+                Callback = listSmsEvents,
+            };
+            try
+            {
+                // 发送请求并返回响应
+                UpdateSmsEventResponse response = smnClient.SendRequest(request);
+                Console.WriteLine("{0}", response.RequestId);
                 Console.ReadLine();
             }
             catch (Exception e)

@@ -83,6 +83,15 @@ namespace Smn.Request.Sms
 
         public override string GetUrl()
         {
+            if (!ValidateUtil.ValidateOffset(offset))
+            {
+                throw new ArgumentException("offset is invalid");
+            }
+
+            if (!ValidateUtil.ValidateLimit(limit))
+            {
+                throw new ArgumentException("limit is invalid");
+            }
             StringBuilder sb = new StringBuilder();
             sb.Append(GetSmnServiceUrl());
             sb.Append(Constants.URL_DELIMITER).Append(Constants.V2).Append(Constants.URL_DELIMITER)
