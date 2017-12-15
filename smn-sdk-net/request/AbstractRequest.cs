@@ -81,14 +81,19 @@ namespace Smn.Request
             return JsonUtil.Serialize(this);
         }
 
-        //public abstract T GetResponse(HttpWebResponse response);
-        public T GetResponse(HttpWebResponse response)
+
+        /// <summary>
+        /// parse the response for the return value
+        /// </summary>
+        /// <param name="response">http response</param>
+        /// <returns>the response object</returns>
+        public virtual T GetResponse(HttpWebResponse response)
         {
             string responseMessage = HttpTool.GetStream(response, Encoding.UTF8);
-            T smsPublishResponse = JsonUtil.UnSerialize<T>(responseMessage);
-            smsPublishResponse.StatusCode = (int)response.StatusCode;
-            smsPublishResponse.ContentString = responseMessage;
-            return smsPublishResponse;
+            T smnResponse = JsonUtil.UnSerialize<T>(responseMessage);
+            smnResponse.StatusCode = (int)response.StatusCode;
+            smnResponse.ContentString = responseMessage;
+            return smnResponse;
         }
 
         public void AddHeader(string key, string value)
