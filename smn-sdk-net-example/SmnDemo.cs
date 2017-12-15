@@ -12,10 +12,10 @@ namespace Smn.Example
         {
             // 初始化client
             smnClient = new SmnClient(
-                "YouUserName",
-                "YouDomainName", 
-                "YouPassword", 
-                "YouRegionId");
+                "YourUserName",
+                "YourDomainName",
+                "YourPlainPassword",
+                "YourRegionName");
 
             //sms publish
             SmsPublish();
