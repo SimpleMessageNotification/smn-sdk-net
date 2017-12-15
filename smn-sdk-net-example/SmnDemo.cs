@@ -24,7 +24,7 @@ namespace Smn.Example
             ListSmsSigns();
             // delete sms sign
             DeleteSmsSign();
-            //    // list sms msg report
+            // list sms msg report
             ListSmsMsgReport();
             // get sended sms messsage content
             GetSmsMessage();
