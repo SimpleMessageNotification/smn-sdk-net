@@ -1,7 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿/*
+ * Copyright (C) 2017. Huawei Technologies Co., LTD. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of Apache License, Version 2.0.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * Apache License, Version 2.0 for more details.
+ */
 using System.Text.RegularExpressions;
 
 namespace Smn.Util
@@ -34,7 +41,7 @@ namespace Smn.Util
         /// <returns>if match return true, else return false</returns>
         public static bool ValidateOffset(int offset)
         {
-            return offset >= 0 ? true : false;
+            return offset >= 0;
         }
 
         /// <summary>
@@ -44,7 +51,7 @@ namespace Smn.Util
         /// <returns>if match return true, else return false</returns>
         public static bool ValidateLimit(int limit)
         {
-            return (limit > 0 && limit <= 100) ? true : false;
+            return limit > 0 && limit <= 100;
         }
 
         /// <summary>
