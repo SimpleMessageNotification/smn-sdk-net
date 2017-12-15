@@ -67,6 +67,10 @@ namespace Smn.Request
 
         public abstract string GetUrl();
 
+        /// <summary>
+        /// User defined parameters, if not set back to null
+        /// </summary>
+        /// <returns>timeout</returns>
         public int? GetTimeout()
         {
             return null;
