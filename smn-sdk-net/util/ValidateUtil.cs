@@ -21,6 +21,8 @@ namespace Smn.Util
     class ValidateUtil
     {
         private const string PATTERN_TELTPHONE = "^\\+?[0-9]{1,31}";
+        private const string PATTERN_TOPIC_NAME = "^[a-zA-Z0-9]{1}[-_a-zA-Z0-9]{0,255}$";
+        private const int MAX_DISPLAY_NAME_LENGTH = 192;
 
         /// <summary>
         /// validate phone
@@ -64,6 +66,33 @@ namespace Smn.Util
             return string.Equals(eventType, Constants.SMS_CALLBACK_SUCCESS)
                 || string.Equals(eventType, Constants.SMS_CALLBACK_FAIL)
                 || string.Equals(eventType, Constants.SMS_CALLBACK_REPLY);
+        }
+
+        /// <summary>
+        /// validate topic name
+        /// </summary>
+        /// <param name="eventType">eventType</param>
+        /// <returns>if match return true, else return false</returns>
+        public static bool ValidateTopicName(string topicName)
+        {
+            if(string.IsNullOrEmpty(topicName))
+            {
+                return false;
+            }
+            Regex rg_chk = new Regex(PATTERN_TOPIC_NAME);
+            Match mt = rg_chk.Match(topicName);
+            return mt.Success;
+        }
+
+        /// <summary>
+        /// validate topic name
+        /// </summary>
+        /// <param name="eventType">eventType</param>
+        /// <returns>if match return true, else return false</returns>
+        public static bool ValidateDisplayName(string displayName) 
+        {
+            byte[] byteArray = System.Text.Encoding.GetEncoding(Constants.UTF8).GetBytes(displayName);
+            return byteArray.Length < MAX_DISPLAY_NAME_LENGTH;
         }
     }
 }

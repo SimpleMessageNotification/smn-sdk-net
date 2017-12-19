@@ -6,38 +6,19 @@ using System.Collections.Generic;
 
 namespace Smn.Example
 {
-    class SmnDemo
+    class SmsDemo
     {
-        static SmnClient smnClient;
-        public static void Main(string[] args)
-        {
-            // 初始化client
-            smnClient = new SmnClient(
-                "YourUserName",
-                "YourDomainName",
-                "YourPlainPassword",
-                "YourRegionName");
+        private SmnClient smnClient;
 
-            //sms publish
-            SmsPublish();
-            // list sms sings
-            ListSmsSigns();
-            // delete sms sign
-            DeleteSmsSign();
-            // list sms msg report
-            ListSmsMsgReport();
-            // get sended sms messsage content
-            GetSmsMessage();
-            //list sms event
-            ListSmsEvent();
-            //update sms event
-            UpdateSmsEvent();
+        public SmsDemo(SmnClient smnClient)
+        {
+            this.smnClient = smnClient;
         }
 
         /// <summary>
         /// 发送短信通知验证码
         /// </summary>
-        public static void SmsPublish()
+        public void SmsPublish()
         {
             // 设置请求对象
             SmsPublishRequest request = new SmsPublishRequest
@@ -66,7 +47,7 @@ namespace Smn.Example
         /// <summary>
         /// 查询短信签名
         /// </summary>
-        public static void ListSmsSigns()
+        public void ListSmsSigns()
         {
             // 设置请求对象
             ListSmsSignsRequest request = new ListSmsSignsRequest();
@@ -87,7 +68,7 @@ namespace Smn.Example
         /// <summary>
         /// 删除短信签名
         /// </summary>
-        public static void DeleteSmsSign()
+        public void DeleteSmsSign()
         {
             // 设置请求对象
             DeleteSmsSignRequest request = new DeleteSmsSignRequest
@@ -111,7 +92,7 @@ namespace Smn.Example
         /// <summary>
         /// 查询短信的发送状态
         /// </summary>
-        public static void ListSmsMsgReport()
+        public void ListSmsMsgReport()
         {
             // 设置请求对象
             ListSmsMsgReportRequest request = new ListSmsMsgReportRequest
@@ -138,7 +119,7 @@ namespace Smn.Example
         /// <summary>
         /// 查询已发送短信的内容
         /// </summary>
-        public static void GetSmsMessage()
+        public void GetSmsMessage()
         {
             // 设置请求对象
             GetSmsMessageRequest request = new GetSmsMessageRequest
@@ -162,7 +143,7 @@ namespace Smn.Example
         /// <summary>
         /// 查询短信回调事件
         /// </summary>
-        public static void ListSmsEvent()
+        public void ListSmsEvent()
         {
             // 设置请求对象
             ListSmsEventRequest request = new ListSmsEventRequest
@@ -186,7 +167,7 @@ namespace Smn.Example
         /// <summary>
         /// 更新短信回调事件
         /// </summary>
-        public static void UpdateSmsEvent()
+        public void UpdateSmsEvent()
         {
             SmsCallbackRequestData successCallbackData = new SmsCallbackRequestData
             {

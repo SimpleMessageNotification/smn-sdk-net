@@ -47,7 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SmnDemo.cs" />
+    <Compile Include="SmnMainDemo.cs" />
+    <Compile Include="SmsDemo.cs" />
+    <Compile Include="TopicDemo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
