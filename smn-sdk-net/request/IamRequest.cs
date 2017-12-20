@@ -21,7 +21,6 @@ namespace Smn.Request
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    [DataContract]
     class IamRequest : AbstractRequest<IamRepsonse>
     {
         public override HttpMethod GetHttpMethod()

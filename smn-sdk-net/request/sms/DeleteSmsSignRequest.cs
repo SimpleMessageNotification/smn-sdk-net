@@ -9,11 +9,11 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * Apache License, Version 2.0 for more details.
  */
+using Newtonsoft.Json;
 using Smn.Http;
 using Smn.Response.Sms;
 using Smn.Util;
 using System;
-using System.Runtime.Serialization;
 using System.Text;
 
 namespace Smn.Request.Sms
@@ -23,7 +23,6 @@ namespace Smn.Request.Sms
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    [DataContract]
     public class DeleteSmsSignRequest : AbstractRequest<DeleteSmsSignResponse>
     {
         /// <summary>
@@ -31,7 +30,7 @@ namespace Smn.Request.Sms
         /// </summary>
         private string signId;
 
-        [DataMember(Name = "sign_id")]
+        [JsonProperty("sign_id")]
         public string SignId { get => signId; set => signId = value; }
 
         public override HttpMethod GetHttpMethod()

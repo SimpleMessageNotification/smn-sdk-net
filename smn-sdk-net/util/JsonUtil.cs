@@ -9,12 +9,8 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * Apache License, Version 2.0 for more details.
  */
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Serialization.Json;
-using System.Text;
-using System.Web.Script.Serialization;
 
 namespace Smn.Util
 {
@@ -26,43 +22,15 @@ namespace Smn.Util
     public class JsonUtil
     {
         /// <summary>
-        /// Deserialize the JSON data into Dictionary
-        /// </summary>
-        /// <param name="jsonData">json data</param>
-        /// <returns>Dictionary</returns>
-        public static Dictionary<string, object> JsonToDictionary(string jsonData)
-        {
-            //实例化JavaScriptSerializer类的新实例
-            JavaScriptSerializer jss = new JavaScriptSerializer();
-            try
-            {
-                //将指定的 JSON 字符串转换为 Dictionary<string, object> 类型的对象
-                return jss.Deserialize<Dictionary<string, object>>(jsonData);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        /// <summary>
         ///Serialize the object to JSON string
         /// </summary>
         /// <param name="item">object</param>
         /// <returns>JSON string</returns>
         public static string Serialize(object item)
         {
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(item.GetType());
-
             try
             {
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    serializer.WriteObject(ms, item);
-                    StringBuilder sb = new StringBuilder();
-                    sb.Append(Encoding.UTF8.GetString(ms.ToArray()));
-                    return sb.ToString();
-                }
+                return JsonConvert.SerializeObject(item);
             }
             catch (Exception e)
             {
@@ -78,12 +46,8 @@ namespace Smn.Util
         /// <returns>the object</returns>
         public static T UnSerialize<T>(string jsonString)
         {
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(T));
-            using (MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(jsonString)))
-            {
-                T jsonObject = (T)ser.ReadObject(ms);
-                return jsonObject;
-            }
+            T jsonObject = JsonConvert.DeserializeObject<T>(jsonString);
+            return jsonObject;
         }
     }
 }

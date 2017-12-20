@@ -11,38 +11,54 @@
  */
 using Newtonsoft.Json;
 using Smn.Http;
-using Smn.Response.Topic;
+using Smn.Response.Publish;
 using Smn.Util;
 using System;
+using System.Collections.Generic;
 using System.Text;
 
-namespace Smn.Request.Topic
+namespace Smn.Request.Publish
 {
     ///<summary> 
-    /// list topic attribute request message
+    /// publish with message template request message
+    /// Use the message template to publish a message to a topic.
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    public class ListTopicAttributesRequest : AbstractRequest<ListTopicAttributesResponse>
+    public class PublishWithTemplateRequest : AbstractRequest<PublishResponse>
     {
-        /// <summary>
-        /// name
-        /// </summary>
-        private string name;
-
         /// <summary>
         /// topic urn
         /// </summary>
         private string topicUrn;
 
-        [JsonProperty("name")]
-        public string Name { get => name; set => name = value; }
-        [JsonProperty("topic_urn")]
+        /// <summary>
+        /// subject 
+        /// </summary>
+        private string subject;
+
+        /// <summary>
+        /// message_template_name
+        /// </summary>
+        private string messageTemplateName;
+
+        /// <summary>
+        /// tags
+        /// </summary>
+        private IDictionary<string, string> tags;
+
+        [JsonIgnore]
         public string TopicUrn { get => topicUrn; set => topicUrn = value; }
+        [JsonProperty("subject")]
+        public string Subject { get => subject; set => subject = value; }
+        [JsonProperty("message_template_name")]
+        public string MessageTemplateName { get => messageTemplateName; set => messageTemplateName = value; }
+        [JsonProperty("tags")]
+        public IDictionary<string, string> Tags { get => tags; set => tags = value; }
 
         public override HttpMethod GetHttpMethod()
         {
-            return HttpMethod.GET;
+            return HttpMethod.POST;
         }
 
         public override string GetUrl()
@@ -52,19 +68,23 @@ namespace Smn.Request.Topic
                 throw new ArgumentException("topic urn is null");
             }
 
+            if (!ValidateUtil.ValidateSubject(subject))
+            {
+                throw new ArgumentException("subject is invalid");
+            }
+
+            if (string.IsNullOrEmpty(messageTemplateName))
+            {
+                throw new ArgumentException("message template name is null");
+            }
+
             StringBuilder sb = new StringBuilder();
             sb.Append(GetSmnServiceUrl());
             sb.Append(Constants.URL_DELIMITER).Append(Constants.V2).Append(Constants.URL_DELIMITER)
                     .Append(ProjectId).Append(Constants.URL_DELIMITER).Append(Constants.SMN_NOTIFICATIONS)
                     .Append(Constants.URL_DELIMITER).Append(Constants.TOPICS)
                     .Append(Constants.URL_DELIMITER).Append(topicUrn)
-                    .Append(Constants.URL_DELIMITER).Append(Constants.ATTRIBUTES);
-
-            String parameters = GetQueryParameters(this);
-            if (!string.IsNullOrEmpty(parameters))
-            {
-                sb.Append("?").Append(parameters);
-            }
+                    .Append(Constants.URL_DELIMITER).Append(Constants.PUBLISH);
             return sb.ToString();
         }
     }

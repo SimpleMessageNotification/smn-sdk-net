@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,30 +30,34 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.10.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="auth\IamAuth.cs" />
-    <Compile Include="exception\SystemException.cs" />
+    <Compile Include="exception\ClientException.cs" />
     <Compile Include="config\SmnConfiguration.cs" />
     <Compile Include="http\HttpMethod.cs" />
     <Compile Include="http\HttpTool.cs" />
     <Compile Include="request\AbstractRequest.cs" />
     <Compile Include="request\IamRequest.cs" />
     <Compile Include="request\IHttpRequest.cs" />
+    <Compile Include="request\publish\PublishWithTemplateRequest.cs" />
+    <Compile Include="request\publish\PublishWithStructureRequest.cs" />
+    <Compile Include="request\publish\PublishRequest.cs" />
     <Compile Include="request\topic\DeleteTopicAttributesRequest.cs" />
     <Compile Include="request\topic\DeleteTopicAttributeByNameRequest.cs" />
     <Compile Include="request\topic\DeleteTopicRequest.cs" />
@@ -71,6 +76,7 @@
     <Compile Include="request\sms\UpdateSmsEventRequest.cs" />
     <Compile Include="response\BaseResponse.cs" />
     <Compile Include="response\IamRepsonse.cs" />
+    <Compile Include="response\publish\PublishResponse.cs" />
     <Compile Include="response\sms\DeleteSmsSignResponse.cs" />
     <Compile Include="response\sms\GetSmsMessageResponse.cs" />
     <Compile Include="response\sms\ListSmsEventResponse.cs" />
@@ -94,9 +100,11 @@
     <Compile Include="util\JsonUtil.cs" />
     <Compile Include="util\ValidateUtil.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="VersionLog.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -9,11 +9,11 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * Apache License, Version 2.0 for more details.
  */
+using Newtonsoft.Json;
 using Smn.Http;
 using Smn.Response.Topic;
 using Smn.Util;
 using System;
-using System.Runtime.Serialization;
 using System.Text;
 
 namespace Smn.Request.Topic
@@ -23,7 +23,6 @@ namespace Smn.Request.Topic
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    [DataContract]
     public class CreateTopicRequest : AbstractRequest<CreateTopicResponse>
     {
         /// <summary>
@@ -36,9 +35,9 @@ namespace Smn.Request.Topic
         /// </summary>
         private string displayName;
 
-        [DataMember(Name = "name")]
+        [JsonProperty("name")]
         public string Name { get => name; set => name = value; }
-        [DataMember(Name = "display_name")]
+        [JsonProperty("display_name")]
         public string DisplayName { get => displayName; set => displayName = value; }
 
         public override HttpMethod GetHttpMethod()

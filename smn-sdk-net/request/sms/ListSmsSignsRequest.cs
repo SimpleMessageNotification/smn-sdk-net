@@ -12,7 +12,6 @@
 using Smn.Http;
 using Smn.Response.Sms;
 using Smn.Util;
-using System.Runtime.Serialization;
 using System.Text;
 
 namespace Smn.Request.Sms
@@ -22,7 +21,6 @@ namespace Smn.Request.Sms
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    [DataContract]
     public class ListSmsSignsRequest : AbstractRequest<ListSmsSignsResponse>
     {
         public override HttpMethod GetHttpMethod()

@@ -10,7 +10,6 @@
  * Apache License, Version 2.0 for more details.
  */
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using System.Text;
 using Smn.Config;
 using Smn.Http;
@@ -19,6 +18,7 @@ using System.Net;
 using Smn.Response;
 using System.Reflection;
 using System;
+using Newtonsoft.Json;
 
 namespace Smn.Request
 {
@@ -27,15 +27,17 @@ namespace Smn.Request
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    [DataContract]
     public abstract class AbstractRequest<T> : IHttpRequest where T : BaseResponse
     {
         private SmnConfiguration smnConfiguration;
         private string projectId;
         private Dictionary<string, string> headers;
 
+        [JsonIgnore]
         public SmnConfiguration SmnConfiguration { get => smnConfiguration; set => smnConfiguration = value; }
+        [JsonIgnore]
         public string ProjectId { get => projectId; set => projectId = value; }
+        [JsonIgnore]
         public Dictionary<string, string> Headers { get => headers; set => headers = value; }
 
         public Encoding GetRequestEncoding()
@@ -129,20 +131,20 @@ namespace Smn.Request
                     continue;
                 }
 
-                object[] attributes = p.GetCustomAttributes(typeof(DataMemberAttribute), true);
-                DataMemberAttribute dataMemberAttribute = null;
+                object[] attributes = p.GetCustomAttributes(typeof(JsonPropertyAttribute), true);
+                JsonPropertyAttribute jsonPropertyAttribute = null;
                 if (attributes == null || attributes.Length == 0)
                 {
                     continue;
                 }
                 foreach (object a in attributes)
                 {
-                    if (typeof(DataMemberAttribute) == a.GetType())
+                    if (typeof(JsonPropertyAttribute) == a.GetType())
                     {
-                        dataMemberAttribute = (DataMemberAttribute)a;
+                        jsonPropertyAttribute = (JsonPropertyAttribute)a;
                     }
                 }
-                if (dataMemberAttribute == null)
+                if (jsonPropertyAttribute == null)
                 {
                     continue;
                 }
@@ -153,7 +155,7 @@ namespace Smn.Request
                     continue;
                 }
 
-                sb.Append(dataMemberAttribute.Name).Append("=").Append(Convert.ToString(value)).Append("&");
+                sb.Append(jsonPropertyAttribute.PropertyName).Append("=").Append(Convert.ToString(value)).Append("&");
             }
 
             int strIndex = sb.Length;
@@ -161,6 +163,7 @@ namespace Smn.Request
             {
                 sb.Remove(strIndex - 1, 1);
             }
+            Console.WriteLine(sb.ToString());
             return sb.ToString();
         }
     }

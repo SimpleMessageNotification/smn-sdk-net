@@ -9,6 +9,8 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * Apache License, Version 2.0 for more details.
  */
+using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace Smn.Util
@@ -20,9 +22,12 @@ namespace Smn.Util
     ///</summary> 
     class ValidateUtil
     {
-        private const string PATTERN_TELTPHONE = "^\\+?[0-9]{1,31}";
-        private const string PATTERN_TOPIC_NAME = "^[a-zA-Z0-9]{1}[-_a-zA-Z0-9]{0,255}$";
+        private static Regex PATTERN_TELTPHONE = new Regex("^\\+?[0-9]{1,31}");
+        private static Regex PATTERN_TOPIC_NAME = new Regex("^[a-zA-Z0-9]{1}[-_a-zA-Z0-9]{0,255}$");
+        private static Regex PATTERN_SUBJECT = new Regex("^[^\\r\\n\\t\\f]+$");
         private const int MAX_DISPLAY_NAME_LENGTH = 192;
+        private const int MAX_SUBJECT_LENGTH = 512;
+        private const int MAX_MESSAGE_LENGTH = 256 * 1024;
 
         /// <summary>
         /// validate phone
@@ -31,8 +36,7 @@ namespace Smn.Util
         /// <returns>if match return true, else return false</returns>
         public static bool ValidatePhone(string phone)
         {
-            Regex rg_chk = new Regex(PATTERN_TELTPHONE);
-            Match mt = rg_chk.Match(phone);
+            Match mt = PATTERN_TELTPHONE.Match(phone);
             return mt.Success;
         }
 
@@ -75,12 +79,12 @@ namespace Smn.Util
         /// <returns>if match return true, else return false</returns>
         public static bool ValidateTopicName(string topicName)
         {
-            if(string.IsNullOrEmpty(topicName))
+            if (string.IsNullOrEmpty(topicName))
             {
                 return false;
             }
-            Regex rg_chk = new Regex(PATTERN_TOPIC_NAME);
-            Match mt = rg_chk.Match(topicName);
+
+            Match mt = PATTERN_TOPIC_NAME.Match(topicName);
             return mt.Success;
         }
 
@@ -89,10 +93,84 @@ namespace Smn.Util
         /// </summary>
         /// <param name="eventType">eventType</param>
         /// <returns>if match return true, else return false</returns>
-        public static bool ValidateDisplayName(string displayName) 
+        public static bool ValidateDisplayName(string displayName)
         {
             byte[] byteArray = System.Text.Encoding.GetEncoding(Constants.UTF8).GetBytes(displayName);
             return byteArray.Length < MAX_DISPLAY_NAME_LENGTH;
+        }
+
+        /// <summary>
+        /// validate subject
+        /// </summary>
+        /// <param name="subject">subject</param>
+        /// <returns>if match return true, else return false</returns>
+        public static bool ValidateSubject(string subject)
+        {
+            if (string.IsNullOrEmpty(subject))
+            {
+                return true;
+            }
+
+            byte[] byteArray = System.Text.Encoding.GetEncoding(Constants.UTF8).GetBytes(subject);
+            if (byteArray.Length > MAX_SUBJECT_LENGTH)
+            {
+                return false;
+            }
+
+            Match mt = PATTERN_SUBJECT.Match(subject);
+            return mt.Success;
+        }
+
+        /// <summary>
+        /// validate message
+        /// </summary>
+        /// <param name="message">message</param>
+        /// <returns>if match return true, else return false</returns>
+        public static bool ValidateMessage(string message)
+        {
+            if (string.IsNullOrEmpty(message))
+            {
+                return false;
+            }
+            byte[] byteArray = System.Text.Encoding.GetEncoding(Constants.UTF8).GetBytes(message);
+            return byteArray.Length < MAX_MESSAGE_LENGTH;
+        }
+
+        /// <summary>
+        /// validate messageStructure lengths
+        /// </summary>
+        /// <param name="messageStructure">messageStructure</param>
+        /// <returns>if match return true, else return false</returns>
+        public static bool ValidateMessageStructureLength(string messageStructure)
+        {
+            if (string.IsNullOrEmpty(messageStructure))
+            {
+                return false;
+            }
+            byte[] byteArray = System.Text.Encoding.GetEncoding(Constants.UTF8).GetBytes(messageStructure);
+            return byteArray.Length < MAX_MESSAGE_LENGTH;
+        }
+
+        /// <summary>
+        /// validate messageStructure contain default message
+        /// </summary>
+        /// <param name="messageStructure">messageStructure</param>
+        /// <returns>if match return true, else return false</returns>
+        public static bool ValidateMessageStructureDefault(string messageStructure)
+        {
+            if (string.IsNullOrEmpty(messageStructure))
+            {
+                return false;
+            }
+            try
+            {
+                Dictionary<string, object> dictionary = JsonUtil.UnSerialize<Dictionary<string, object>>(messageStructure);
+                return dictionary.ContainsKey(Constants.DEFAULT);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
     }
 }

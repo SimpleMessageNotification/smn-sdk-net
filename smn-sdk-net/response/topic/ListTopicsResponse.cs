@@ -9,8 +9,8 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * Apache License, Version 2.0 for more details.
  */
+using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace Smn.Response.Topic
 {
@@ -19,7 +19,6 @@ namespace Smn.Response.Topic
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    [DataContract]
     public class ListTopicsResponse : BaseResponse
     {
         /// <summary>
@@ -32,16 +31,15 @@ namespace Smn.Response.Topic
         /// </summary>
         private List<TopicInfo> topics;
 
-        [DataMember(Name = "topic_count")]
+        [JsonProperty("topic_count")]
         public int TopicCount { get => topicCount; set => topicCount = value; }
-        [DataMember(Name = "topics")]
+        [JsonProperty("topics")]
         public List<TopicInfo> Topics { get => topics; set => topics = value; }
     }
 
     /// <summary>
     /// topic data info
     /// </summary>
-    [DataContract]
     public class TopicInfo
     {
         /// <summary>
@@ -64,13 +62,13 @@ namespace Smn.Response.Topic
         /// </summary>
         private string pushPolicy;
 
-        [DataMember(Name = "name")]
+        [JsonProperty("name")]
         public string Name { get => name; set => name = value; }
-        [DataMember(Name = "topic_urn")]
+        [JsonProperty("topic_urn")]
         public string TopicUrn { get => topicUrn; set => topicUrn = value; }
-        [DataMember(Name = "display_name")]
+        [JsonProperty("display_name")]
         public string DisplayName { get => displayName; set => displayName = value; }
-        [DataMember(Name = "push_policy")]
+        [JsonProperty("push_policy")]
         public string PushPolicy { get => pushPolicy; set => pushPolicy = value; }
     }
 }

@@ -2,6 +2,7 @@
 using Smn.Request.Topic;
 using Smn.Response.Topic;
 using System;
+using System.Collections.Generic;
 
 namespace Smn.Example
 {
@@ -21,7 +22,7 @@ namespace Smn.Example
             // 设置请求对象
             CreateTopicRequest request = new CreateTopicRequest
             {
-                Name = "create_by_zhangyx_test_csharp",
+                Name = "create_by_zhangyx_test_csharp3",
                 DisplayName = "testtyc12020016",
             };
             try
@@ -124,7 +125,7 @@ namespace Smn.Example
             // 设置请求对象
             DeleteTopicRequest request = new DeleteTopicRequest
             {
-                TopicUrn = "urn:smn:cn-north-1:cffe4fc4c9a54219b60dbaf7b586e132:create_by_zhangyx_test_csharp"
+                TopicUrn = "urn:smn:cn-north-1:cffe4fc4c9a54219b60dbaf7b586e132:create_by_zhangyx_test_csharp3"
             };
             try
             {
@@ -199,6 +200,7 @@ namespace Smn.Example
             {
                 // 发送请求并返回响应
                 ListTopicAttributesResponse response = smnClient.SendRequest(request);
+                Dictionary<string, object> attributes = response.Attributes;
                 Console.WriteLine("{0}", response);
                 Console.ReadLine();
             }

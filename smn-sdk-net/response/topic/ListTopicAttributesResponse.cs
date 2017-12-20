@@ -9,8 +9,8 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * Apache License, Version 2.0 for more details.
  */
+using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace Smn.Response.Topic
 {
@@ -19,7 +19,6 @@ namespace Smn.Response.Topic
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    [DataContract]
     public class ListTopicAttributesResponse : BaseResponse
     {
         /// <summary>
@@ -27,7 +26,7 @@ namespace Smn.Response.Topic
         /// </summary>
         private Dictionary<string, object> attributes;
 
-        [DataMember(Name = "attributes")]
+        [JsonProperty("attributes")]
         public Dictionary<string, object> Attributes { get => attributes; set => attributes = value; }
     }
 }

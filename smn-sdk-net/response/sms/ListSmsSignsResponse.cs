@@ -9,8 +9,8 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * Apache License, Version 2.0 for more details.
  */
+using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace Smn.Response.Sms
 {
@@ -19,7 +19,6 @@ namespace Smn.Response.Sms
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    [DataContract]
     public class ListSmsSignsResponse : BaseResponse
     {
         /// <summary>
@@ -32,9 +31,9 @@ namespace Smn.Response.Sms
         /// </summary>
         private List<SmsSignInfo> smsSigns;
 
-        [DataMember(Name = "sms_sign_count")]
+        [JsonProperty("sms_sign_count")]
         public int SmsSignCount { get => smsSignCount; set => smsSignCount = value; }
-        [DataMember(Name = "sms_signs")]
+        [JsonProperty("sms_signs")]
         public List<SmsSignInfo> SmsSigns { get => smsSigns; set => smsSigns = value; }
     }
 
@@ -43,7 +42,6 @@ namespace Smn.Response.Sms
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    [DataContract]
     public class SmsSignInfo
     {
         /// <summary>
@@ -71,15 +69,15 @@ namespace Smn.Response.Sms
         /// </summary>
         private int status;
 
-        [DataMember(Name = "sign_name")]
+        [JsonProperty("sign_name")]
         public string SignName { get => signName; set => signName = value; }
-        [DataMember(Name = "create_time")]
+        [JsonProperty("create_time")]
         public string CreateTime { get => createTime; set => createTime = value; }
-        [DataMember(Name = "sign_id")]
+        [JsonProperty("sign_id")]
         public string SignId { get => signId; set => signId = value; }
-        [DataMember(Name = "reply")]
+        [JsonProperty("reply")]
         public string Reply { get => reply; set => reply = value; }
-        [DataMember(Name = "status")]
+        [JsonProperty("status")]
         public int Status { get => status; set => status = value; }
     }
 }

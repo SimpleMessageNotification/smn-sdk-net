@@ -24,7 +24,7 @@ namespace Smn.Example
             SmsPublishRequest request = new SmsPublishRequest
             {
                 // 发送手机号码 号码格式 (+)(国家码)(手机号码)
-                Endpoint = "+86136*****587",
+                Endpoint = "+86136****7587",
                 // 短信签名必填,需要在消息通知服务的自助页面申请签名，申请办理时间约2天
                 SignId = "6be340e91e5241e4b5d85837e6709104",
                 Message = "您的验证码是:1234，请查收"
@@ -73,7 +73,7 @@ namespace Smn.Example
             // 设置请求对象
             DeleteSmsSignRequest request = new DeleteSmsSignRequest
             {
-                SignId = "359cc8d7676d45ac87970d305dc02321",
+                SignId = "741213a6ef644e2a8d977a7f82459f7f",
             };
             try
             {
@@ -124,7 +124,7 @@ namespace Smn.Example
             // 设置请求对象
             GetSmsMessageRequest request = new GetSmsMessageRequest
             {
-                MessageId = "c90c791e54dd4c987c63b250982",
+                MessageId = "8cdb2584e1b44246812207ae4c4eaae7",
             };
             try
             {
@@ -148,7 +148,7 @@ namespace Smn.Example
             // 设置请求对象
             ListSmsEventRequest request = new ListSmsEventRequest
             {
-                EventType = "sms_fail_event",
+                
             };
             try
             {

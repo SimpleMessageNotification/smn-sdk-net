@@ -9,11 +9,11 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * Apache License, Version 2.0 for more details.
  */
+using Newtonsoft.Json;
 using Smn.Http;
 using Smn.Response.Sms;
 using Smn.Util;
 using System;
-using System.Runtime.Serialization;
 using System.Text;
 
 namespace Smn.Request.Sms
@@ -23,7 +23,6 @@ namespace Smn.Request.Sms
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    [DataContract]
     public class ListSmsMsgReportRequest : AbstractRequest<ListSmsMsgReportResponse>
     {
         /// <summary>
@@ -61,19 +60,19 @@ namespace Smn.Request.Sms
         /// </summary>
         private int limit = 100;
 
-        [DataMember(Name = "start_time")]
+        [JsonProperty("start_time")]
         public string StartTime { get => startTime; set => startTime = value; }
-        [DataMember(Name = "end_time")]
+        [JsonProperty("end_time")]
         public string EndTime { get => endTime; set => endTime = value; }
-        [DataMember(Name = "sign_id")]
+        [JsonProperty("sign_id")]
         public string SignId { get => signId; set => signId = value; }
-        [DataMember(Name = "mobile")]
+        [JsonProperty("mobile")]
         public string Mobile { get => mobile; set => mobile = value; }
-        [DataMember(Name = "status")]
+        [JsonProperty("status")]
         public int? Status { get => status; set => status = value; }
-        [DataMember(Name = "offset")]
+        [JsonProperty("offset")]
         public int Offset { get => offset; set => offset = value; }
-        [DataMember(Name = "limit")]
+        [JsonProperty("limit")]
         public int Limit { get => limit; set => limit = value; }
 
         public override HttpMethod GetHttpMethod()
