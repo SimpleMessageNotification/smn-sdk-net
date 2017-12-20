@@ -73,21 +73,22 @@ namespace Smn.Request.Topic
 
         public override ListTopicAttributesResponse GetResponse(HttpWebResponse response)
         {
-            string responseMessage = HttpTool.GetStream(response, Encoding.UTF8);
-            ListTopicAttributesResponse smnResponse = new ListTopicAttributesResponse();
-            smnResponse.StatusCode = (int)response.StatusCode;
-            smnResponse.ContentString = responseMessage;
+            ListTopicAttributesResponse smnResponse = base.GetResponse(response);
+
             Dictionary<string, object> dictionary;
             try
             {
-                dictionary = JsonUtil.JsonToDictionary(responseMessage);
+                dictionary = JsonUtil.JsonToDictionary(smnResponse.ContentString);
             }
             catch (Exception e)
             {
                 dictionary = new Dictionary<string, object>();
             }
 
-            smnResponse.Attributes = (Dictionary<string, object>)dictionary["attributes"];
+            if (dictionary.ContainsKey("attributes"))
+            {
+                smnResponse.Attributes = (Dictionary<string, object>)dictionary["attributes"];
+            }
             return smnResponse;
         }
     }
