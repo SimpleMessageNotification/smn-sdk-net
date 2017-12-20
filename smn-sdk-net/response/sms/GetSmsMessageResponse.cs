@@ -9,7 +9,6 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * Apache License, Version 2.0 for more details.
  */
-using System.Runtime.Serialization;
 
 namespace Smn.Response.Sms
 {
@@ -18,7 +17,6 @@ namespace Smn.Response.Sms
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    [DataContract]
     public class GetSmsMessageResponse : BaseResponse
     {
         /// <summary>

@@ -9,45 +9,43 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * Apache License, Version 2.0 for more details.
  */
+using Newtonsoft.Json;
 using Smn.Http;
+using Smn.Response.Publish;
+using Smn.Util;
 using System;
 using System.Text;
-using Smn.Util;
-using Smn.Response.Sms;
-using Newtonsoft.Json;
 
-namespace Smn.Request.Sms
+namespace Smn.Request.Publish
 {
     ///<summary> 
-    /// smn publish request message
-    /// Directly send SMS messages to phone numbers, 
-    /// usually used for verification code or notification.
+    /// publish with message text request message
+    /// Publish messages in common text to a topic. 
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    public class SmsPublishRequest : AbstractRequest<SmsPublishResponse>
+    public class PublishRequest : AbstractRequest<PublishResponse>
     {
         /// <summary>
-        /// message access point
+        /// topic urn
         /// </summary>
-        private String endpoint;
+        private string topicUrn;
 
         /// <summary>
-        /// message to send
+        /// subject 
         /// </summary>
-        private String message;
+        private string subject;
 
         /// <summary>
-        /// message signature id
+        /// message
         /// </summary>
-        private String signId;
-
-        [JsonProperty("endpoint")]
-        public string Endpoint { get => endpoint; set => endpoint = value; }
+        private string message;
+        [JsonIgnore]
+        public string TopicUrn { get => topicUrn; set => topicUrn = value; }
+        [JsonProperty("subject")]
+        public string Subject { get => subject; set => subject = value; }
         [JsonProperty("message")]
         public string Message { get => message; set => message = value; }
-        [JsonProperty("sign_id")]
-        public string SignId { get => signId; set => signId = value; }
 
         public override HttpMethod GetHttpMethod()
         {
@@ -56,26 +54,27 @@ namespace Smn.Request.Sms
 
         public override string GetUrl()
         {
-            if (string.IsNullOrEmpty(signId))
+            if (string.IsNullOrEmpty(topicUrn))
             {
-                throw new ArgumentException("sign id is null");
+                throw new ArgumentException("topic urn is null");
             }
 
-            if (string.IsNullOrEmpty(message))
+            if (!ValidateUtil.ValidateSubject(subject))
             {
-                throw new ArgumentException("message is null");
+                throw new ArgumentException("subject is invalid");
             }
 
-            if (string.IsNullOrEmpty(endpoint) || !ValidateUtil.ValidatePhone(endpoint))
+            if (!ValidateUtil.ValidateMessage(message))
             {
-                throw new ArgumentException("endpoint is null or invalid");
+                throw new ArgumentException("message is invalid");
             }
-
             StringBuilder sb = new StringBuilder();
             sb.Append(GetSmnServiceUrl());
             sb.Append(Constants.URL_DELIMITER).Append(Constants.V2).Append(Constants.URL_DELIMITER)
                     .Append(ProjectId).Append(Constants.URL_DELIMITER).Append(Constants.SMN_NOTIFICATIONS)
-                    .Append(Constants.URL_DELIMITER).Append(Constants.SMN_SUB_PROTOCOL_SMS);
+                    .Append(Constants.URL_DELIMITER).Append(Constants.TOPICS)
+                    .Append(Constants.URL_DELIMITER).Append(topicUrn)
+                    .Append(Constants.URL_DELIMITER).Append(Constants.PUBLISH);
             return sb.ToString();
         }
     }

@@ -9,10 +9,8 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * Apache License, Version 2.0 for more details.
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
+
+using Newtonsoft.Json;
 
 namespace Smn.Response.Topic
 {
@@ -21,7 +19,6 @@ namespace Smn.Response.Topic
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    [DataContract]
     public class QueryTopicDetailResponse : BaseResponse
     {
         /// <summary>
@@ -54,17 +51,17 @@ namespace Smn.Response.Topic
         /// </summary>
         private string updateTime;
 
-        [DataMember(Name = "name")]
+        [JsonProperty("name")]
         public string Name { get => name; set => name = value; }
-        [DataMember(Name = "topic_urn")]
+        [JsonProperty("topic_urn")]
         public string TopicUrn { get => topicUrn; set => topicUrn = value; }
-        [DataMember(Name = "display_name")]
+        [JsonProperty("display_name")]
         public string DisplayName { get => displayName; set => displayName = value; }
-        [DataMember(Name = "push_policy")]
+        [JsonProperty("push_policy")]
         public string PushPolicy { get => pushPolicy; set => pushPolicy = value; }
-        [DataMember(Name = "create_time")]
+        [JsonProperty("create_time")]
         public string CreateTime { get => createTime; set => createTime = value; }
-        [DataMember(Name = "update_time")]
+        [JsonProperty("update_time")]
         public string UpdateTime { get => updateTime; set => updateTime = value; }
     }
 }

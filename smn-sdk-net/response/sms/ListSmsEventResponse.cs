@@ -9,8 +9,8 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * Apache License, Version 2.0 for more details.
  */
+using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace Smn.Response.Sms
 {
@@ -19,7 +19,6 @@ namespace Smn.Response.Sms
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    [DataContract]
     public class ListSmsEventResponse : BaseResponse
     {
         /// <summary>
@@ -32,10 +31,10 @@ namespace Smn.Response.Sms
         /// </summary>
         private string topicUrn;
 
-        [DataMember(Name = "callback")]
+        [JsonProperty("callback")]
         public List<SmsCallback> Callback { get => callback; set => callback = value; }
 
-        [DataMember(Name = "topic_urn")]
+        [JsonProperty("topic_urn")]
         public string TopicUrn { get => topicUrn; set => topicUrn = value; }
     }
 
@@ -44,7 +43,6 @@ namespace Smn.Response.Sms
     /// author:zhangyx
     /// version:1.0.0
     /// </summary>
-    [DataContract]
     public class SmsCallback
     {
         /// <summary>
@@ -57,9 +55,9 @@ namespace Smn.Response.Sms
         /// </summary>
         private string topicUrn;
 
-        [DataMember(Name = "event_type")]
+        [JsonProperty("event_type")]
         public string EventType { get => eventType; set => eventType = value; }
-        [DataMember(Name = "topic_urn")]
+        [JsonProperty("topic_urn")]
         public string TopicUrn { get => topicUrn; set => topicUrn = value; }
     }
 }

@@ -19,11 +19,11 @@ using System.Text;
 namespace Smn.Request.Topic
 {
     ///<summary> 
-    /// create topic request message
+    /// update topic attribute request message
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    public class CreateTopicRequest : AbstractRequest<CreateTopicResponse>
+    public class UpdateTopicAttributeRequest : AbstractRequest<UpdateTopicAttributeResponse>
     {
         /// <summary>
         /// name
@@ -31,37 +31,52 @@ namespace Smn.Request.Topic
         private string name;
 
         /// <summary>
-        /// display name
+        /// topic urn
         /// </summary>
-        private string displayName;
+        private string topicUrn;
 
-        [JsonProperty("name")]
+        /// <summary>
+        /// value
+        /// </summary>
+        private string value;
+
+        [JsonIgnore]
         public string Name { get => name; set => name = value; }
-        [JsonProperty("display_name")]
-        public string DisplayName { get => displayName; set => displayName = value; }
+        [JsonIgnore]
+        public string TopicUrn { get => topicUrn; set => topicUrn = value; }
+        [JsonProperty("value")]
+        public string Value { get => value; set => this.value = value; }
 
         public override HttpMethod GetHttpMethod()
         {
-            return HttpMethod.POST;
+            return HttpMethod.PUT;
         }
 
         public override string GetUrl()
         {
-            if (!ValidateUtil.ValidateTopicName(name))
+            if (string.IsNullOrEmpty(topicUrn))
             {
-                throw new ArgumentException("name is invalid");
+                throw new ArgumentException("topic urn is null");
             }
 
-            if (!string.IsNullOrEmpty(displayName) && !ValidateUtil.ValidateDisplayName(displayName))
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentException("display name is invalid");
+                throw new ArgumentException("name is null");
+            }
+
+            if (string.IsNullOrEmpty(value))
+            {
+                throw new ArgumentException("value is null");
             }
 
             StringBuilder sb = new StringBuilder();
             sb.Append(GetSmnServiceUrl());
             sb.Append(Constants.URL_DELIMITER).Append(Constants.V2).Append(Constants.URL_DELIMITER)
                     .Append(ProjectId).Append(Constants.URL_DELIMITER).Append(Constants.SMN_NOTIFICATIONS)
-                    .Append(Constants.URL_DELIMITER).Append(Constants.TOPICS);
+                    .Append(Constants.URL_DELIMITER).Append(Constants.TOPICS)
+                    .Append(Constants.URL_DELIMITER).Append(topicUrn)
+                    .Append(Constants.URL_DELIMITER).Append(Constants.ATTRIBUTES)
+                    .Append(Constants.URL_DELIMITER).Append(name);
             return sb.ToString();
         }
     }

@@ -9,8 +9,8 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * Apache License, Version 2.0 for more details.
  */
+using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace Smn.Response.Sms
 {
@@ -19,7 +19,6 @@ namespace Smn.Response.Sms
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    [DataContract]
     public class ListSmsMsgReportResponse : BaseResponse
     {
         /// <summary>
@@ -32,16 +31,15 @@ namespace Smn.Response.Sms
         /// </summary>
         private List<SmsReportData> data;
 
-        [DataMember(Name = "data")]
+        [JsonProperty("data")]
         public List<SmsReportData> Data { get => data; set => data = value; }
-        [DataMember(Name = "count")]
+        [JsonProperty("count")]
         public int Count { get => count; set => count = value; }
     }
 
     /// <summary>
     /// 
     /// </summary>
-    [DataContract]
     public class SmsReportData
     {
         /// <summary>
@@ -94,25 +92,25 @@ namespace Smn.Response.Sms
         /// </summary>
         private string deliverTime;
 
-        [DataMember(Name = "message_id")]
+        [JsonProperty("message_id")]
         public string MessageId { get => messageId; set => messageId = value; }
-        [DataMember(Name = "status")]
+        [JsonProperty("status")]
         public int Status { get => status; set => status = value; }
-        [DataMember(Name = "sign_id")]
+        [JsonProperty("sign_id")]
         public string SignId { get => signId; set => signId = value; }
-        [DataMember(Name = "status_desc")]
+        [JsonProperty("status_desc")]
         public string StatusDesc { get => statusDesc; set => statusDesc = value; }
-        [DataMember(Name = "fee_num")]
+        [JsonProperty("fee_num")]
         public int FeeNum { get => feeNum; set => feeNum = value; }
-        [DataMember(Name = "extend_code")]
+        [JsonProperty("extend_code")]
         public string ExtendCode { get => extendCode; set => extendCode = value; }
-        [DataMember(Name = "nation_code")]
+        [JsonProperty("nation_code")]
         public string NationCode { get => nationCode; set => nationCode = value; }
-        [DataMember(Name = "mobile")]
+        [JsonProperty("mobile")]
         public string Mobile { get => mobile; set => mobile = value; }
-        [DataMember(Name = "submit_time")]
+        [JsonProperty("submit_time")]
         public string SubmitTime { get => submitTime; set => submitTime = value; }
-        [DataMember(Name = "deliver_time")]
+        [JsonProperty("deliver_time")]
         public string DeliverTime { get => deliverTime; set => deliverTime = value; }
     }
 }

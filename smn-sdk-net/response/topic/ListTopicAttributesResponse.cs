@@ -10,22 +10,23 @@
  * Apache License, Version 2.0 for more details.
  */
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
-namespace Smn.Response.Sms
+namespace Smn.Response.Topic
 {
     ///<summary> 
-    /// smn publish response message
+    /// list topic attributes response message
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    public class SmsPublishResponse : BaseResponse
+    public class ListTopicAttributesResponse : BaseResponse
     {
         /// <summary>
-        /// message id
+        /// attributes
         /// </summary>
-        private string messageId;
+        private Dictionary<string, object> attributes;
 
-        [JsonProperty("message_id")]
-        public string MessageId { get => messageId; set => messageId = value; }
+        [JsonProperty("attributes")]
+        public Dictionary<string, object> Attributes { get => attributes; set => attributes = value; }
     }
 }

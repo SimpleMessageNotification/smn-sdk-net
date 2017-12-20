@@ -9,7 +9,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * Apache License, Version 2.0 for more details.
  */
-using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace Smn.Response.Topic
 {
@@ -18,7 +18,6 @@ namespace Smn.Response.Topic
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    [DataContract]
     public class CreateTopicResponse : BaseResponse
     {
         /// <summary>
@@ -26,7 +25,7 @@ namespace Smn.Response.Topic
         /// </summary>
         private string topicUrn;
 
-        [DataMember(Name = "topic_urn")]
+        [JsonProperty("topic_urn")]
         public string TopicUrn { get => topicUrn; set => topicUrn = value; }
     }
 }

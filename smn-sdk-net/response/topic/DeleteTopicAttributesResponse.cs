@@ -9,23 +9,15 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * Apache License, Version 2.0 for more details.
  */
-using Newtonsoft.Json;
 
-namespace Smn.Response.Sms
+namespace Smn.Response.Topic
 {
     ///<summary> 
-    /// smn publish response message
+    /// delete topic attributes response message
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    public class SmsPublishResponse : BaseResponse
+    public class DeleteTopicAttributesResponse : BaseResponse
     {
-        /// <summary>
-        /// message id
-        /// </summary>
-        private string messageId;
-
-        [JsonProperty("message_id")]
-        public string MessageId { get => messageId; set => messageId = value; }
     }
 }

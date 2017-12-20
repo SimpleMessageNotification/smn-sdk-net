@@ -75,6 +75,7 @@ namespace Smn.Http
             if ((httpMethod == HttpMethod.POST || httpMethod == HttpMethod.PUT)
                 && !string.IsNullOrEmpty(httpRequest.GetBodyParams()))
             {
+                Console.WriteLine(httpRequest.GetBodyParams());
                 using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                 {
                     streamWriter.Write(httpRequest.GetBodyParams());

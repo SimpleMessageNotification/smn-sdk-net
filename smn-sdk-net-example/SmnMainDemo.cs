@@ -45,6 +45,23 @@ namespace Smn.Example
             topicDemo.ListTopics();
             // delete topic
             topicDemo.DeleteTopic();
+            // update topic attribute
+            topicDemo.UpdateTopicAttribute();
+            //list topic attributes
+            topicDemo.ListTopicAttributes();
+            // delete all topic attributes
+            topicDemo.DeleteTopicAttributes();
+            // delete topic attribute by name
+            topicDemo.DeleteTopicAttributeByName();
+
+            PublishDemo publishDemo = new PublishDemo(smnClient);
+            // publish message 
+            publishDemo.PublishWithMessage();
+            // publish with message structure
+            publishDemo.PublishWithMessageStructure();
+            // publish with message template
+            publishDemo.PublishWithMessageTemplate();
+
         }
     }
 }

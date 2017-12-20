@@ -17,6 +17,8 @@ using Smn.Util;
 using System.Collections.Generic;
 using System;
 using Smn.Config;
+using Newtonsoft.Json.Linq;
+using Smn.Exceptions;
 
 namespace Smn.Auth
 {
@@ -77,15 +79,28 @@ namespace Smn.Auth
 
             if (!HttpTool.IsSuccess(response))
             {
-                throw new SystemException("Unexpected response status: " + response.StatusCode + ", ErrorMessage is " + responseMessage);
+                throw new ClientException("Unexpected response status: " + response.StatusCode + ", ErrorMessage is " + responseMessage);
             }
 
             authToken = response.Headers.Get(Constants.X_SUBJECT_TOKEN);
-            Dictionary<string, object> map = JsonUtil.JsonToDictionary(responseMessage);
-            projectId = ((Dictionary<string, object>)((Dictionary<string, object>)map[Constants.TOKEN])[Constants.PROJECT])[Constants.ID].ToString();
-            expirtAt = ((Dictionary<string, object>)map[Constants.TOKEN])[Constants.EXPIRES_AT].ToString();
+            
+            try
+            {
+                // resolve token
+                Dictionary<string, JObject> map = JsonUtil.UnSerialize<Dictionary<string, JObject>>(responseMessage);
+                Dictionary<string, object> tokenMap = map[Constants.TOKEN].ToObject<Dictionary<string, object>>();
+                Dictionary<string, object> projectMap = ((JObject)tokenMap[Constants.PROJECT]).ToObject<Dictionary<string, object>>();
 
-            expiresTime = DateUtil.GetTimeStamp(DateUtil.ConvertToDateTimeUtc(expirtAt)) - EXPIRED_INTERVAL;
+                projectId = projectMap[Constants.ID].ToString();
+                expirtAt = tokenMap[Constants.EXPIRES_AT].ToString();
+
+                expiresTime = DateUtil.GetTimeStamp(DateUtil.ConvertToDateTimeUtc(expirtAt)) - EXPIRED_INTERVAL;
+            }
+            catch (Exception e)
+            {
+                throw new ClientException("Unable to parse the returned token data, ErrorMessage is " + e.Message);
+            }
+
         }
 
         private bool IsExpired()

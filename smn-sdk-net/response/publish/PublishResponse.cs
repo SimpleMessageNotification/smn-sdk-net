@@ -11,17 +11,18 @@
  */
 using Newtonsoft.Json;
 
-namespace Smn.Response.Sms
+namespace Smn.Response.Publish
 {
     ///<summary> 
-    /// smn publish response message
+    /// publish message response
+    /// for PublishWithStrctureRequest/PublishRequest
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    public class SmsPublishResponse : BaseResponse
+    public class PublishResponse : BaseResponse
     {
         /// <summary>
-        /// message id
+        /// message_id
         /// </summary>
         private string messageId;
 

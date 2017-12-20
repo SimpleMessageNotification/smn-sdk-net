@@ -9,11 +9,11 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * Apache License, Version 2.0 for more details.
  */
+using Newtonsoft.Json;
 using Smn.Http;
 using Smn.Response.Topic;
 using Smn.Util;
 using System;
-using System.Runtime.Serialization;
 using System.Text;
 
 namespace Smn.Request.Topic
@@ -23,7 +23,6 @@ namespace Smn.Request.Topic
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    [DataContract]
     public class QueryTopicDetailRequest : AbstractRequest<QueryTopicDetailResponse>
     {
         /// <summary>
@@ -31,7 +30,7 @@ namespace Smn.Request.Topic
         /// </summary>
         private string topicUrn;
 
-        [DataMember(Name = "topic_urn")]
+        [JsonIgnore]
         public string TopicUrn { get => topicUrn; set => topicUrn = value; }
 
         public override HttpMethod GetHttpMethod()
@@ -41,7 +40,7 @@ namespace Smn.Request.Topic
 
         public override string GetUrl()
         {
-            if (string.IsNullOrEmpty(TopicUrn))
+            if (string.IsNullOrEmpty(topicUrn))
             {
                 throw new ArgumentException("topic urn is null");
             }
@@ -51,7 +50,7 @@ namespace Smn.Request.Topic
             sb.Append(Constants.URL_DELIMITER).Append(Constants.V2).Append(Constants.URL_DELIMITER)
                     .Append(ProjectId).Append(Constants.URL_DELIMITER).Append(Constants.SMN_NOTIFICATIONS)
                     .Append(Constants.URL_DELIMITER).Append(Constants.TOPICS)
-                    .Append(Constants.URL_DELIMITER).Append(TopicUrn);
+                    .Append(Constants.URL_DELIMITER).Append(topicUrn);
             return sb.ToString();
         }
     }

@@ -9,12 +9,12 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * Apache License, Version 2.0 for more details.
  */
+using Newtonsoft.Json;
 using Smn.Http;
 using Smn.Response.Sms;
 using Smn.Util;
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using System.Text;
 
 namespace Smn.Request.Sms
@@ -24,7 +24,6 @@ namespace Smn.Request.Sms
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    [DataContract]
     public class UpdateSmsEventRequest : AbstractRequest<UpdateSmsEventResponse>
     {
         /// <summary>
@@ -32,7 +31,7 @@ namespace Smn.Request.Sms
         /// </summary>
         private List<SmsCallbackRequestData> callback;
 
-        [DataMember(Name = "callback")]
+        [JsonProperty("callback")]
         public List<SmsCallbackRequestData> Callback { get => callback; set => callback = value; }
 
         public override HttpMethod GetHttpMethod()
@@ -62,7 +61,6 @@ namespace Smn.Request.Sms
     /// author:zhangyx
     /// version:1.0.0
     /// </summary>
-    [DataContract]
     public class SmsCallbackRequestData
     {
         /// <summary>
@@ -75,9 +73,9 @@ namespace Smn.Request.Sms
         /// </summary>
         private string topicUrn;
 
-        [DataMember(Name = "event_type")]
+        [JsonProperty("event_type")]
         public string EventType { get => eventType; set => eventType = value; }
-        [DataMember(Name = "topic_urn")]
+        [JsonProperty("topic_urn")]
         public string TopicUrn { get => topicUrn; set => topicUrn = value; }
     }
 }

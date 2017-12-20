@@ -9,12 +9,12 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * Apache License, Version 2.0 for more details.
  */
+using Newtonsoft.Json;
 using Smn.Http;
 using Smn.Response.Sms;
 using Smn.Util;
 using System;
 using System.Net;
-using System.Runtime.Serialization;
 using System.Text;
 
 namespace Smn.Request.Sms
@@ -24,7 +24,6 @@ namespace Smn.Request.Sms
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    [DataContract]
     public class GetSmsMessageRequest : AbstractRequest<GetSmsMessageResponse>
     {
         /// <summary>
@@ -32,7 +31,7 @@ namespace Smn.Request.Sms
         /// </summary>
         private string messageId;
 
-        [DataMember(Name = "message_id")]
+        [JsonProperty("message_id")]
         public string MessageId { get => messageId; set => messageId = value; }
 
         public override HttpMethod GetHttpMethod()

@@ -11,27 +11,34 @@
  */
 using Newtonsoft.Json;
 using Smn.Http;
-using Smn.Response.Sms;
+using Smn.Response.Topic;
 using Smn.Util;
 using System;
 using System.Text;
 
-namespace Smn.Request.Sms
+namespace Smn.Request.Topic
 {
     ///<summary> 
-    /// delete sms sign request message
+    /// delete topic attribute by name request message
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    public class DeleteSmsSignRequest : AbstractRequest<DeleteSmsSignResponse>
+    public class DeleteTopicAttributeByNameRequest : AbstractRequest<DeleteTopicAttributeByNameResponse>
     {
         /// <summary>
-        /// sign id
+        /// name
         /// </summary>
-        private string signId;
+        private string name;
 
-        [JsonProperty("sign_id")]
-        public string SignId { get => signId; set => signId = value; }
+        /// <summary>
+        /// topic urn
+        /// </summary>
+        private string topicUrn;
+
+        [JsonIgnore]
+        public string Name { get => name; set => name = value; }
+        [JsonIgnore]
+        public string TopicUrn { get => topicUrn; set => topicUrn = value; }
 
         public override HttpMethod GetHttpMethod()
         {
@@ -40,17 +47,24 @@ namespace Smn.Request.Sms
 
         public override string GetUrl()
         {
-            if (string.IsNullOrEmpty(signId))
+            if (string.IsNullOrEmpty(topicUrn))
             {
-                throw new ArgumentException("sign id is null");
+                throw new ArgumentException("topic urn is null");
+            }
+
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentException("name is null");
             }
 
             StringBuilder sb = new StringBuilder();
             sb.Append(GetSmnServiceUrl());
             sb.Append(Constants.URL_DELIMITER).Append(Constants.V2).Append(Constants.URL_DELIMITER)
                     .Append(ProjectId).Append(Constants.URL_DELIMITER).Append(Constants.SMN_NOTIFICATIONS)
-                    .Append(Constants.URL_DELIMITER).Append(Constants.SMN_SIGN).Append(Constants.URL_DELIMITER)
-                    .Append(signId);
+                    .Append(Constants.URL_DELIMITER).Append(Constants.TOPICS)
+                    .Append(Constants.URL_DELIMITER).Append(topicUrn)
+                    .Append(Constants.URL_DELIMITER).Append(Constants.ATTRIBUTES)
+                    .Append(Constants.URL_DELIMITER).Append(name);
             return sb.ToString();
         }
     }
