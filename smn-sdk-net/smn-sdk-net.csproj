@@ -53,9 +53,13 @@
     <Compile Include="request\AbstractRequest.cs" />
     <Compile Include="request\IamRequest.cs" />
     <Compile Include="request\IHttpRequest.cs" />
+    <Compile Include="request\topic\DeleteTopicAttributesRequest.cs" />
+    <Compile Include="request\topic\DeleteTopicAttributeByNameRequest.cs" />
     <Compile Include="request\topic\DeleteTopicRequest.cs" />
+    <Compile Include="request\topic\ListTopicAttributesRequest.cs" />
     <Compile Include="request\topic\ListTopicsRequest.cs" />
     <Compile Include="request\topic\QueryTopicDetailRequest.cs" />
+    <Compile Include="request\topic\UpdateTopicAttributeRequest.cs" />
     <Compile Include="request\topic\UpdateTopicRequest.cs" />
     <Compile Include="request\topic\CreateTopicRequest.cs" />
     <Compile Include="request\sms\DeleteSmsSignRequest.cs" />
@@ -75,9 +79,13 @@
     <Compile Include="response\sms\SmsPublishResponse.cs" />
     <Compile Include="response\sms\UpdateSmsEventResponse.cs" />
     <Compile Include="response\topic\CreateTopicResponse.cs" />
+    <Compile Include="response\topic\DeleteTopicAttributesResponse.cs" />
+    <Compile Include="response\topic\DeleteTopicAttributeByNameResponse.cs" />
     <Compile Include="response\topic\DeleteTopicResponse.cs" />
+    <Compile Include="response\topic\ListTopicAttributesResponse.cs" />
     <Compile Include="response\topic\ListTopicsResponse.cs" />
     <Compile Include="response\topic\QueryTopicDetailResponse.cs" />
+    <Compile Include="response\topic\UpdateTopicAttributeResponse.cs" />
     <Compile Include="response\topic\UpdateTopicResponse.cs" />
     <Compile Include="SmnClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

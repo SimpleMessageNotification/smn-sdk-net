@@ -31,7 +31,7 @@ namespace Smn.Example
             smsDemo.GetSmsMessage();
             //list sms event
             smsDemo.ListSmsEvent();
-            //update sms event
+            //up.date sms event
             smsDemo.UpdateSmsEvent();
 
             TopicDemo topicDemo = new TopicDemo(smnClient);
@@ -45,6 +45,14 @@ namespace Smn.Example
             topicDemo.ListTopics();
             // delete topic
             topicDemo.DeleteTopic();
+            // update topic attribute
+            topicDemo.UpdateTopicAttribute();
+            // list topic attributes
+            topicDemo.ListTopicAttributes();
+            // delete all topic attributes
+            topicDemo.DeleteTopicAttributes();
+            // delete topic attribute by name
+            topicDemo.DeleteTopicAttributeByName();
         }
     }
 }

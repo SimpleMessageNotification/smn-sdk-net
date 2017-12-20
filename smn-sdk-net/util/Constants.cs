@@ -37,6 +37,7 @@ namespace Smn.Util
         public const string SMS_MESSAGE = "message";
         public const string CALLBACK = "callback";
         public const string TOPICS = "topics";
+        public const string ATTRIBUTES = "attributes";
 
         public const string SMS_CALLBACK_SUCCESS = "sms_success_event";
         public const string SMS_CALLBACK_FAIL = "sms_fail_event";

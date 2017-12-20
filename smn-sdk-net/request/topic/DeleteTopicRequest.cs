@@ -41,7 +41,7 @@ namespace Smn.Request.Topic
 
         public override string GetUrl()
         {
-            if (string.IsNullOrEmpty(TopicUrn))
+            if (string.IsNullOrEmpty(topicUrn))
             {
                 throw new ArgumentException("topic urn is null");
             }
@@ -51,7 +51,7 @@ namespace Smn.Request.Topic
             sb.Append(Constants.URL_DELIMITER).Append(Constants.V2).Append(Constants.URL_DELIMITER)
                     .Append(ProjectId).Append(Constants.URL_DELIMITER).Append(Constants.SMN_NOTIFICATIONS)
                     .Append(Constants.URL_DELIMITER).Append(Constants.TOPICS)
-                    .Append(Constants.URL_DELIMITER).Append(TopicUrn);
+                    .Append(Constants.URL_DELIMITER).Append(topicUrn);
             return sb.ToString();
         }
     }

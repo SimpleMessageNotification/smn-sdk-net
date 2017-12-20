@@ -19,24 +19,36 @@ using System.Text;
 namespace Smn.Request.Topic
 {
     ///<summary> 
-    /// query topic detail request message
+    /// update topic attribute request message
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
     [DataContract]
-    public class QueryTopicDetailRequest : AbstractRequest<QueryTopicDetailResponse>
+    public class UpdateTopicAttributeRequest : AbstractRequest<UpdateTopicAttributeResponse>
     {
+        /// <summary>
+        /// name
+        /// </summary>
+        private string name;
+
         /// <summary>
         /// topic urn
         /// </summary>
         private string topicUrn;
 
-        [DataMember(Name = "topic_urn")]
+        /// <summary>
+        /// value
+        /// </summary>
+        private string value;
+
+        public string Name { get => name; set => name = value; }
         public string TopicUrn { get => topicUrn; set => topicUrn = value; }
+        [DataMember(Name = "value")]
+        public string Value { get => value; set => this.value = value; }
 
         public override HttpMethod GetHttpMethod()
         {
-            return HttpMethod.GET;
+            return HttpMethod.PUT;
         }
 
         public override string GetUrl()
@@ -46,12 +58,24 @@ namespace Smn.Request.Topic
                 throw new ArgumentException("topic urn is null");
             }
 
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentException("name is null");
+            }
+
+            if (string.IsNullOrEmpty(value))
+            {
+                throw new ArgumentException("value is null");
+            }
+
             StringBuilder sb = new StringBuilder();
             sb.Append(GetSmnServiceUrl());
             sb.Append(Constants.URL_DELIMITER).Append(Constants.V2).Append(Constants.URL_DELIMITER)
                     .Append(ProjectId).Append(Constants.URL_DELIMITER).Append(Constants.SMN_NOTIFICATIONS)
                     .Append(Constants.URL_DELIMITER).Append(Constants.TOPICS)
-                    .Append(Constants.URL_DELIMITER).Append(topicUrn);
+                    .Append(Constants.URL_DELIMITER).Append(topicUrn)
+                    .Append(Constants.URL_DELIMITER).Append(Constants.ATTRIBUTES)
+                    .Append(Constants.URL_DELIMITER).Append(name);
             return sb.ToString();
         }
     }

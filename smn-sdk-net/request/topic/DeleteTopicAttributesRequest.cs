@@ -19,24 +19,23 @@ using System.Text;
 namespace Smn.Request.Topic
 {
     ///<summary> 
-    /// query topic detail request message
+    /// delete topic attributes request message
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
     [DataContract]
-    public class QueryTopicDetailRequest : AbstractRequest<QueryTopicDetailResponse>
+    public class DeleteTopicAttributeseRequest : AbstractRequest<DeleteTopicAttributesResponse>
     {
         /// <summary>
         /// topic urn
         /// </summary>
         private string topicUrn;
 
-        [DataMember(Name = "topic_urn")]
         public string TopicUrn { get => topicUrn; set => topicUrn = value; }
 
         public override HttpMethod GetHttpMethod()
         {
-            return HttpMethod.GET;
+            return HttpMethod.DELETE;
         }
 
         public override string GetUrl()
@@ -51,7 +50,8 @@ namespace Smn.Request.Topic
             sb.Append(Constants.URL_DELIMITER).Append(Constants.V2).Append(Constants.URL_DELIMITER)
                     .Append(ProjectId).Append(Constants.URL_DELIMITER).Append(Constants.SMN_NOTIFICATIONS)
                     .Append(Constants.URL_DELIMITER).Append(Constants.TOPICS)
-                    .Append(Constants.URL_DELIMITER).Append(topicUrn);
+                    .Append(Constants.URL_DELIMITER).Append(topicUrn)
+                    .Append(Constants.URL_DELIMITER).Append(Constants.ATTRIBUTES);
             return sb.ToString();
         }
     }

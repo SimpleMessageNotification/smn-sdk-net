@@ -81,7 +81,6 @@ namespace Smn.Request
             return JsonUtil.Serialize(this);
         }
 
-
         /// <summary>
         /// parse the response for the return value
         /// </summary>

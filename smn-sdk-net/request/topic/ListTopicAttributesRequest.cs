@@ -13,24 +13,33 @@ using Smn.Http;
 using Smn.Response.Topic;
 using Smn.Util;
 using System;
+using System.Collections.Generic;
+using System.Net;
 using System.Runtime.Serialization;
 using System.Text;
 
 namespace Smn.Request.Topic
 {
     ///<summary> 
-    /// query topic detail request message
+    /// list topic attribute request message
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
     [DataContract]
-    public class QueryTopicDetailRequest : AbstractRequest<QueryTopicDetailResponse>
+    public class ListTopicAttributesRequest : AbstractRequest<ListTopicAttributesResponse>
     {
+        /// <summary>
+        /// name
+        /// </summary>
+        private string name;
+
         /// <summary>
         /// topic urn
         /// </summary>
         private string topicUrn;
 
+        [DataMember(Name = "name")]
+        public string Name { get => name; set => name = value; }
         [DataMember(Name = "topic_urn")]
         public string TopicUrn { get => topicUrn; set => topicUrn = value; }
 
@@ -51,8 +60,35 @@ namespace Smn.Request.Topic
             sb.Append(Constants.URL_DELIMITER).Append(Constants.V2).Append(Constants.URL_DELIMITER)
                     .Append(ProjectId).Append(Constants.URL_DELIMITER).Append(Constants.SMN_NOTIFICATIONS)
                     .Append(Constants.URL_DELIMITER).Append(Constants.TOPICS)
-                    .Append(Constants.URL_DELIMITER).Append(topicUrn);
+                    .Append(Constants.URL_DELIMITER).Append(topicUrn)
+                    .Append(Constants.URL_DELIMITER).Append(Constants.ATTRIBUTES);
+
+            String parameters = GetQueryParameters(this);
+            if (!string.IsNullOrEmpty(parameters))
+            {
+                sb.Append("?").Append(parameters);
+            }
             return sb.ToString();
+        }
+
+        public override ListTopicAttributesResponse GetResponse(HttpWebResponse response)
+        {
+            string responseMessage = HttpTool.GetStream(response, Encoding.UTF8);
+            ListTopicAttributesResponse smnResponse = new ListTopicAttributesResponse();
+            smnResponse.StatusCode = (int)response.StatusCode;
+            smnResponse.ContentString = responseMessage;
+            Dictionary<string, object> dictionary;
+            try
+            {
+                dictionary = JsonUtil.JsonToDictionary(responseMessage);
+            }
+            catch (Exception e)
+            {
+                dictionary = new Dictionary<string, object>();
+            }
+
+            smnResponse.Attributes = (Dictionary<string, object>)dictionary["attributes"];
+            return smnResponse;
         }
     }
 }

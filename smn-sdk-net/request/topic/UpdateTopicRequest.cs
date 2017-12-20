@@ -36,7 +36,6 @@ namespace Smn.Request.Topic
         /// </summary>
         private string displayName;
 
-        [DataMember(Name = "topic_urn")]
         public string TopicUrn { get => topicUrn; set => topicUrn = value; }
         [DataMember(Name = "display_name")]
         public string DisplayName { get => displayName; set => displayName = value; }
