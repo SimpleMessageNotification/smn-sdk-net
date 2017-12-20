@@ -31,7 +31,7 @@ namespace Smn.Example
             smsDemo.GetSmsMessage();
             //list sms event
             smsDemo.ListSmsEvent();
-            //up.date sms event
+            //update sms event
             smsDemo.UpdateSmsEvent();
 
             TopicDemo topicDemo = new TopicDemo(smnClient);
