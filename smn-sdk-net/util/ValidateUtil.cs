@@ -25,9 +25,11 @@ namespace Smn.Util
         private static Regex PATTERN_TELTPHONE = new Regex("^\\+?[0-9]{1,31}");
         private static Regex PATTERN_TOPIC_NAME = new Regex("^[a-zA-Z0-9]{1}[-_a-zA-Z0-9]{0,255}$");
         private static Regex PATTERN_SUBJECT = new Regex("^[^\\r\\n\\t\\f]+$");
+        private static Regex PATTERN_TEMPLATE_NAME = new Regex("^[a-zA-Z0-9]{1}([-_a-zA-Z0-9]){0,64}");
         private const int MAX_DISPLAY_NAME_LENGTH = 192;
         private const int MAX_SUBJECT_LENGTH = 512;
         private const int MAX_MESSAGE_LENGTH = 256 * 1024;
+        private const int MAX_TEMPLATE_CONTENT  = 256 * 1024;
 
         /// <summary>
         /// validate phone
@@ -171,6 +173,36 @@ namespace Smn.Util
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// validate message template content
+        /// </summary>
+        /// <param name="content">message template content</param>
+        /// <returns>if match return true, else return false</returns>
+        public static bool ValidateMessageTemplateContent(string content)
+        {
+            if (string.IsNullOrEmpty(content))
+            {
+                return false;
+            }
+            byte[] byteArray = System.Text.Encoding.GetEncoding(Constants.UTF8).GetBytes(content);
+            return byteArray.Length < MAX_TEMPLATE_CONTENT;
+        }
+
+        /// <summary>
+        /// validate message template name
+        /// </summary>
+        /// <param name="tempateName">template name</param>
+        /// <returns>if match return true, else return false</returns>
+        public static bool ValidateMessageTemplateName(string tempateName)
+        {
+            if (string.IsNullOrEmpty(tempateName))
+            {
+                return false;
+            }
+            Match mt = PATTERN_TEMPLATE_NAME.Match(tempateName);
+            return mt.Success;
         }
     }
 }
