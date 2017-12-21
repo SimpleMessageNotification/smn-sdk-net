@@ -16,7 +16,7 @@ namespace Smn.Example
                 "YourUserName",
                 "YourDomainName",
                 "YourPlainPassword",
-                "YourRegionName");
+                "YourRegionName");.
 
             SmsDemo smsDemo = new SmsDemo(smnClient);
             //sms publish
@@ -62,6 +62,15 @@ namespace Smn.Example
             // publish with message template
             publishDemo.PublishWithMessageTemplate();
 
+            SubscriptionDemo subscriptionDemo = new SubscriptionDemo(smnClient);
+            // list subscriptions
+            subscriptionDemo.ListSubscriptions();
+            // list subscriptions by topic
+            subscriptionDemo.ListSubscriptionsByTopic();
+            // Unsubscribe
+            subscriptionDemo.Unsubscribe();
+            // Subscribe
+            subscriptionDemo.Subscribe();
         }
     }
 }
