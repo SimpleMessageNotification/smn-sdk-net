@@ -16,7 +16,7 @@ namespace Smn.Example
                 "YourUserName",
                 "YourDomainName",
                 "YourPlainPassword",
-                "YourRegionName");.
+                "YourRegionName");
 
             SmsDemo smsDemo = new SmsDemo(smnClient);
             //sms publish
