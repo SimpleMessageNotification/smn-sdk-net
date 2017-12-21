@@ -54,6 +54,7 @@
     <Compile Include="SmnMainDemo.cs" />
     <Compile Include="SmsDemo.cs" />
     <Compile Include="PublishDemo.cs" />
+    <Compile Include="SubscriptionDemo.cs" />
     <Compile Include="TopicDemo.cs" />
   </ItemGroup>
   <ItemGroup>

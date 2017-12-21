@@ -58,6 +58,10 @@
     <Compile Include="request\publish\PublishWithTemplateRequest.cs" />
     <Compile Include="request\publish\PublishWithStructureRequest.cs" />
     <Compile Include="request\publish\PublishRequest.cs" />
+    <Compile Include="request\subscription\ListSubscriptionsByTopicRequest.cs" />
+    <Compile Include="request\subscription\ListSubscriptionsRequest.cs" />
+    <Compile Include="request\subscription\SubscribeRequest.cs" />
+    <Compile Include="request\subscription\UnsubscribeRequest.cs" />
     <Compile Include="request\topic\DeleteTopicAttributesRequest.cs" />
     <Compile Include="request\topic\DeleteTopicAttributeByNameRequest.cs" />
     <Compile Include="request\topic\DeleteTopicRequest.cs" />
@@ -84,6 +88,10 @@
     <Compile Include="response\sms\ListSmsSignsResponse.cs" />
     <Compile Include="response\sms\SmsPublishResponse.cs" />
     <Compile Include="response\sms\UpdateSmsEventResponse.cs" />
+    <Compile Include="response\subscription\SubscribeResponse.cs" />
+    <Compile Include="response\subscription\ListSubscriptionsByTopicResponse.cs" />
+    <Compile Include="response\subscription\ListSubscriptionsResponse.cs" />
+    <Compile Include="response\subscription\UnsubscribeResponse.cs" />
     <Compile Include="response\topic\CreateTopicResponse.cs" />
     <Compile Include="response\topic\DeleteTopicAttributesResponse.cs" />
     <Compile Include="response\topic\DeleteTopicAttributeByNameResponse.cs" />
@@ -106,5 +114,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -163,7 +163,6 @@ namespace Smn.Request
             {
                 sb.Remove(strIndex - 1, 1);
             }
-            Console.WriteLine(sb.ToString());
             return sb.ToString();
         }
     }
