@@ -1,6 +1,7 @@
 ﻿using Smn;
 using Smn.Request.Subscription;
 using Smn.Response.Subscription;
+using Smn.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -104,7 +105,7 @@ namespace Smn.Example
             SubscribeRequest request = new SubscribeRequest
             {
                 TopicUrn = "urn:smn:cn-north-1:cffe4fc4c9a54219b60dbaf7b586e132:SmnApi",
-                Protocol = "email",
+                Protocol = ProtocolType.EMAIL,
                 Endpoint = "zhangyaxing@huawei.com",
                 Remark = "api订阅接口测试成功"
             };

@@ -71,6 +71,19 @@ namespace Smn.Example
             subscriptionDemo.Unsubscribe();
             // Subscribe
             subscriptionDemo.Subscribe();
+
+            MessageTemplateDemo messageTemplateDemo = new MessageTemplateDemo(smnClient);
+            // create message template
+            messageTemplateDemo.CreateMessageTemplate();
+            // delete message template 
+            messageTemplateDemo.DeleteMessageTemplate();
+            // update message template
+            messageTemplateDemo.UpdateMessageTemplate();
+            // list message templates
+            messageTemplateDemo.ListMessageTemplates();
+            // query message template detail 
+            messageTemplateDemo.QueryMessageTemplateDetail();
+
         }
     }
 }

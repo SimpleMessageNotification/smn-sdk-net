@@ -62,6 +62,11 @@
     <Compile Include="request\subscription\ListSubscriptionsRequest.cs" />
     <Compile Include="request\subscription\SubscribeRequest.cs" />
     <Compile Include="request\subscription\UnsubscribeRequest.cs" />
+    <Compile Include="request\template\QueryMessageTemplateDetailRequest.cs" />
+    <Compile Include="request\template\ListMessageTemplatesRequest.cs" />
+    <Compile Include="request\template\DeleteMessageTemplateRequest.cs" />
+    <Compile Include="request\template\UpdateMessageTemplateRequest.cs" />
+    <Compile Include="request\template\CreateMessageTemplateRequest.cs" />
     <Compile Include="request\topic\DeleteTopicAttributesRequest.cs" />
     <Compile Include="request\topic\DeleteTopicAttributeByNameRequest.cs" />
     <Compile Include="request\topic\DeleteTopicRequest.cs" />
@@ -92,6 +97,11 @@
     <Compile Include="response\subscription\ListSubscriptionsByTopicResponse.cs" />
     <Compile Include="response\subscription\ListSubscriptionsResponse.cs" />
     <Compile Include="response\subscription\UnsubscribeResponse.cs" />
+    <Compile Include="response\template\DeleteMessageTemplateResponse.cs" />
+    <Compile Include="response\template\QueryMessageTemplateDetailResponse.cs" />
+    <Compile Include="response\template\ListMessageTemplatesResponse.cs" />
+    <Compile Include="response\template\UpdateMessageTemplateResponse.cs" />
+    <Compile Include="response\template\CreateMessageTemplateResponse.cs" />
     <Compile Include="response\topic\CreateTopicResponse.cs" />
     <Compile Include="response\topic\DeleteTopicAttributesResponse.cs" />
     <Compile Include="response\topic\DeleteTopicAttributeByNameResponse.cs" />
@@ -106,6 +116,7 @@
     <Compile Include="util\Constants.cs" />
     <Compile Include="util\DateUtil.cs" />
     <Compile Include="util\JsonUtil.cs" />
+    <Compile Include="util\ProtocolType.cs" />
     <Compile Include="util\ValidateUtil.cs" />
   </ItemGroup>
   <ItemGroup>
