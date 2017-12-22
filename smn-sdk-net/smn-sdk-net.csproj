@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,45 +30,101 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.10.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="auth\IamAuth.cs" />
-    <Compile Include="exception\SystemException.cs" />
+    <Compile Include="exception\ClientException.cs" />
     <Compile Include="config\SmnConfiguration.cs" />
     <Compile Include="http\HttpMethod.cs" />
     <Compile Include="http\HttpTool.cs" />
     <Compile Include="request\AbstractRequest.cs" />
     <Compile Include="request\IamRequest.cs" />
     <Compile Include="request\IHttpRequest.cs" />
+    <Compile Include="request\publish\PublishWithTemplateRequest.cs" />
+    <Compile Include="request\publish\PublishWithStructureRequest.cs" />
+    <Compile Include="request\publish\PublishRequest.cs" />
+    <Compile Include="request\subscription\ListSubscriptionsByTopicRequest.cs" />
+    <Compile Include="request\subscription\ListSubscriptionsRequest.cs" />
+    <Compile Include="request\subscription\SubscribeRequest.cs" />
+    <Compile Include="request\subscription\UnsubscribeRequest.cs" />
+    <Compile Include="request\template\QueryMessageTemplateDetailRequest.cs" />
+    <Compile Include="request\template\ListMessageTemplatesRequest.cs" />
+    <Compile Include="request\template\DeleteMessageTemplateRequest.cs" />
+    <Compile Include="request\template\UpdateMessageTemplateRequest.cs" />
+    <Compile Include="request\template\CreateMessageTemplateRequest.cs" />
+    <Compile Include="request\topic\DeleteTopicAttributesRequest.cs" />
+    <Compile Include="request\topic\DeleteTopicAttributeByNameRequest.cs" />
+    <Compile Include="request\topic\DeleteTopicRequest.cs" />
+    <Compile Include="request\topic\ListTopicAttributesRequest.cs" />
+    <Compile Include="request\topic\ListTopicsRequest.cs" />
+    <Compile Include="request\topic\QueryTopicDetailRequest.cs" />
+    <Compile Include="request\topic\UpdateTopicAttributeRequest.cs" />
+    <Compile Include="request\topic\UpdateTopicRequest.cs" />
+    <Compile Include="request\topic\CreateTopicRequest.cs" />
+    <Compile Include="request\sms\DeleteSmsSignRequest.cs" />
+    <Compile Include="request\sms\ListSmsEventRequest.cs" />
+    <Compile Include="request\sms\GetSmsMessageRequest.cs" />
+    <Compile Include="request\sms\ListSmsMsgReportRequest.cs" />
+    <Compile Include="request\sms\ListSmsSignsRequest.cs" />
     <Compile Include="request\sms\SmsPublishRequest.cs" />
+    <Compile Include="request\sms\UpdateSmsEventRequest.cs" />
     <Compile Include="response\BaseResponse.cs" />
     <Compile Include="response\IamRepsonse.cs" />
+    <Compile Include="response\publish\PublishResponse.cs" />
+    <Compile Include="response\sms\DeleteSmsSignResponse.cs" />
+    <Compile Include="response\sms\GetSmsMessageResponse.cs" />
+    <Compile Include="response\sms\ListSmsEventResponse.cs" />
+    <Compile Include="response\sms\ListSmsMsgReportResponse.cs" />
+    <Compile Include="response\sms\ListSmsSignsResponse.cs" />
     <Compile Include="response\sms\SmsPublishResponse.cs" />
+    <Compile Include="response\sms\UpdateSmsEventResponse.cs" />
+    <Compile Include="response\subscription\SubscribeResponse.cs" />
+    <Compile Include="response\subscription\ListSubscriptionsByTopicResponse.cs" />
+    <Compile Include="response\subscription\ListSubscriptionsResponse.cs" />
+    <Compile Include="response\subscription\UnsubscribeResponse.cs" />
+    <Compile Include="response\template\DeleteMessageTemplateResponse.cs" />
+    <Compile Include="response\template\QueryMessageTemplateDetailResponse.cs" />
+    <Compile Include="response\template\ListMessageTemplatesResponse.cs" />
+    <Compile Include="response\template\UpdateMessageTemplateResponse.cs" />
+    <Compile Include="response\template\CreateMessageTemplateResponse.cs" />
+    <Compile Include="response\topic\CreateTopicResponse.cs" />
+    <Compile Include="response\topic\DeleteTopicAttributesResponse.cs" />
+    <Compile Include="response\topic\DeleteTopicAttributeByNameResponse.cs" />
+    <Compile Include="response\topic\DeleteTopicResponse.cs" />
+    <Compile Include="response\topic\ListTopicAttributesResponse.cs" />
+    <Compile Include="response\topic\ListTopicsResponse.cs" />
+    <Compile Include="response\topic\QueryTopicDetailResponse.cs" />
+    <Compile Include="response\topic\UpdateTopicAttributeResponse.cs" />
+    <Compile Include="response\topic\UpdateTopicResponse.cs" />
     <Compile Include="SmnClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="util\Constants.cs" />
     <Compile Include="util\DateUtil.cs" />
     <Compile Include="util\JsonUtil.cs" />
+    <Compile Include="util\ProtocolType.cs" />
     <Compile Include="util\ValidateUtil.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="VersionLog.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

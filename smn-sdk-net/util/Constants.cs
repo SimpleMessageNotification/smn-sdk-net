@@ -32,5 +32,21 @@ namespace Smn.Util
         public const string EXPIRES_AT = "expires_at";
         public const string SMN_NOTIFICATIONS = "notifications";
         public const string SMN_SUB_PROTOCOL_SMS = "sms";
+        public const string SMN_SIGN = "sms_sign";
+        public const string SMS_REPORT = "report";
+        public const string SMS_MESSAGE = "message";
+        public const string CALLBACK = "callback";
+        public const string TOPICS = "topics";
+        public const string ATTRIBUTES = "attributes";
+        public const string PUBLISH = "publish";
+        public const string DEFAULT = "default";
+        public const string SUBSCRIPTIONS = "subscriptions";
+        public const string MESSAGE_TEMPLATE = "message_template";
+
+        public const string SMS_CALLBACK_SUCCESS = "sms_success_event";
+        public const string SMS_CALLBACK_FAIL = "sms_fail_event";
+        public const string SMS_CALLBACK_REPLY = "sms_reply_event";
+
+        public const string UTF8 = "UTF-8";
     }
 }

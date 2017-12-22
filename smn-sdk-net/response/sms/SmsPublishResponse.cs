@@ -9,7 +9,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * Apache License, Version 2.0 for more details.
  */
-using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace Smn.Response.Sms
 {
@@ -18,7 +18,6 @@ namespace Smn.Response.Sms
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    [DataContract]
     public class SmsPublishResponse : BaseResponse
     {
         /// <summary>
@@ -26,7 +25,7 @@ namespace Smn.Response.Sms
         /// </summary>
         private string messageId;
 
-        [DataMember(Name = "message_id")]
+        [JsonProperty("message_id")]
         public string MessageId { get => messageId; set => messageId = value; }
     }
 }

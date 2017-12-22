@@ -13,18 +13,18 @@ using Smn.Http;
 using System;
 using System.Text;
 using Smn.Util;
-using System.Runtime.Serialization;
 using Smn.Response.Sms;
-using System.Net;
+using Newtonsoft.Json;
 
 namespace Smn.Request.Sms
 {
     ///<summary> 
     /// smn publish request message
+    /// Directly send SMS messages to phone numbers, 
+    /// usually used for verification code or notification.
     /// author:zhangyx
     /// version:1.0.0
     ///</summary> 
-    [DataContract]
     public class SmsPublishRequest : AbstractRequest<SmsPublishResponse>
     {
         /// <summary>
@@ -42,21 +42,16 @@ namespace Smn.Request.Sms
         /// </summary>
         private String signId;
 
-        [DataMember(Name = "endpoint")]
+        [JsonProperty("endpoint")]
         public string Endpoint { get => endpoint; set => endpoint = value; }
-        [DataMember(Name = "message")]
+        [JsonProperty("message")]
         public string Message { get => message; set => message = value; }
-        [DataMember(Name = "sign_id")]
+        [JsonProperty("sign_id")]
         public string SignId { get => signId; set => signId = value; }
 
         public override HttpMethod GetHttpMethod()
         {
             return HttpMethod.POST;
-        }
-
-        public override int? GetTimeout()
-        {
-            return null;
         }
 
         public override string GetUrl()
