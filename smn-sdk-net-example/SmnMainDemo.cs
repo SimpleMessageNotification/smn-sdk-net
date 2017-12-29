@@ -10,6 +10,7 @@ namespace Smn.Example
     class SmnMainDemo
     {
         static SmnClient smnClient;
+
         public static void Main(string[] args)
         {
             // 初始化client

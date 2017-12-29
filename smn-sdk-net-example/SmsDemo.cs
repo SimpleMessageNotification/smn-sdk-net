@@ -24,7 +24,7 @@ namespace Smn.Example
             SmsPublishRequest request = new SmsPublishRequest
             {
                 // 发送手机号码 号码格式 (+)(国家码)(手机号码)
-                Endpoint = "+8613688807587",
+                Endpoint = "+86136****7587",
                 // 短信签名必填,需要在消息通知服务的自助页面申请签名，申请办理时间约2天
                 SignId = "6be340e91e5241e4b5d85837e6709104",
                 Message = "您的验证码是:1234，请查收"
