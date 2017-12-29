@@ -1,4 +1,5 @@
 ﻿using Smn;
+using Smn.Config;
 using Smn.Request.Sms;
 using Smn.Response.Sms;
 using System;
@@ -17,6 +18,23 @@ namespace Smn.Example
                 "YourDomainName",
                 "YourPlainPassword",
                 "YourRegionName");
+
+            // if you want to customize the HTTP parameters,
+            // or use http proxy, you can use like this
+            //ClientConfiguration configuration = new ClientConfiguration
+            //{
+            //    Timeout = 80000,
+            //    ProxyHost = "127.0.0.1",
+            //    ProxyPort = 808,
+            //    ProxyUsername = "break",
+            //    ProxyPassword = "123456"
+            //};
+            //smnClient = new SmnClient(
+            //    "YourUserName",
+            //    "YourDomainName",
+            //    "YourPlainPassword",
+            //    "YourRegionName",
+            //    configuration);
 
             SmsDemo smsDemo = new SmsDemo(smnClient);
             //sms publish

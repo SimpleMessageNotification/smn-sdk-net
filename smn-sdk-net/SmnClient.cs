@@ -27,6 +27,7 @@ namespace Smn
     public class SmnClient
     {
         private SmnConfiguration smnConfiguration;
+        private ClientConfiguration clientConfiguration;
         private IamAuth auth;
 
         /// <summary>
@@ -37,6 +38,16 @@ namespace Smn
         /// <param name="password">you cloud password</param>
         /// <param name="regionName">region name, see http://developer.huaweicloud.com/endpoint.html</param>
         public SmnClient(string username, string domainName, string password, string regionName)
+            : this(username, domainName, password, regionName, new ClientConfiguration()) { }
+
+        /// <summary>
+        /// create a new smn client instance with clientConfigurtaion
+        /// </summary>
+        /// <param name="username">you cloud username</param>
+        /// <param name="domainName">you cloud domainName</param>
+        /// <param name="password">you cloud password</param>
+        /// <param name="regionName">region name, see http://developer.huaweicloud.com/endpoint.html</param>
+        public SmnClient(string username, string domainName, string password, string regionName, ClientConfiguration clientConfiguration)
         {
             smnConfiguration = new SmnConfiguration
             {
@@ -45,10 +56,11 @@ namespace Smn
                 Password = password,
                 RegionName = regionName
             };
-
+            this.clientConfiguration = clientConfiguration ?? new ClientConfiguration();
             auth = new IamAuth
             {
-                SmnConfiguration = smnConfiguration
+                SmnConfiguration = smnConfiguration,
+                ClientConfiguration = clientConfiguration
             };
         }
 
@@ -64,7 +76,7 @@ namespace Smn
             AddCommonHeaders(httpRequest, authToken, projectId);
             httpRequest.SmnConfiguration = smnConfiguration;
             httpRequest.ProjectId = projectId;
-            HttpWebResponse response = HttpTool.GetHttpResponse(httpRequest);
+            HttpWebResponse response = HttpTool.GetHttpResponse(httpRequest, this.clientConfiguration);
             return httpRequest.GetResponse(response);
         }
 
@@ -77,6 +89,7 @@ namespace Smn
             httpRequest.AddHeader("region", smnConfiguration.RegionName);
             httpRequest.AddHeader("X-Auth-Token", token);
             httpRequest.AddHeader("X-Project-Id", projectId);
+            httpRequest.AddHeader("X-Smn-Sdk", smnConfiguration.GetUserAgent());
         }
     }
 }

@@ -16,6 +16,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.IO;
 using Smn.Request;
 using System.Text;
+using Smn.Config;
 
 namespace Smn.Http
 {
@@ -30,8 +31,9 @@ namespace Smn.Http
         /// send httpRequest and get response
         /// </summary>
         /// <param name="httpRequest">the request data to send</param>
+        /// <param name="clientConfiguration">http client configuration</param>
         /// <returns>the response of the request</returns>
-        public static HttpWebResponse GetHttpResponse(IHttpRequest httpRequest)
+        public static HttpWebResponse GetHttpResponse(IHttpRequest httpRequest, ClientConfiguration clientConfiguration)
         {
             string url = httpRequest.GetUrl();
             if (string.IsNullOrEmpty(url))
@@ -39,16 +41,10 @@ namespace Smn.Http
                 throw new ArgumentNullException("url is null");
             }
 
-            HttpWebRequest request = null;
-
+            HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
             if (url.StartsWith("https", StringComparison.OrdinalIgnoreCase))
             {
                 ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);
-                request = WebRequest.Create(url) as HttpWebRequest;
-            }
-            else
-            {
-                request = WebRequest.Create(url) as HttpWebRequest;
             }
 
             HttpMethod httpMethod = httpRequest.GetHttpMethod();
@@ -56,9 +52,18 @@ namespace Smn.Http
             request.ContentType = httpRequest.GetContentType();
             request.UserAgent = httpRequest.GetUserAgent();
 
+            //set http proxy
+            SetHttpProxy(request, clientConfiguration);
+            // set timeout
             if (httpRequest.GetTimeout().HasValue)
             {
                 request.Timeout = httpRequest.GetTimeout().Value;
+                request.ReadWriteTimeout = httpRequest.GetTimeout().Value;
+            }
+            else if (clientConfiguration.Timeout.HasValue)
+            {
+                request.Timeout = clientConfiguration.Timeout.Value;
+                request.ReadWriteTimeout = clientConfiguration.Timeout.Value;
             }
 
             #region add header
@@ -155,6 +160,33 @@ namespace Smn.Http
             catch (Exception e)
             {
                 throw e;
+            }
+        }
+
+        private static void SetHttpProxy(HttpWebRequest request, ClientConfiguration clientConfiguration)
+        {
+            request.Proxy = null;
+
+            if (!string.IsNullOrEmpty(clientConfiguration.ProxyHost))
+            {
+                if (clientConfiguration.ProxyPort.HasValue)
+                {
+
+                    request.Proxy = new WebProxy(clientConfiguration.ProxyHost, clientConfiguration.ProxyPort.Value);
+                }
+                else
+                {
+                    request.Proxy = new WebProxy(clientConfiguration.ProxyHost);
+
+                }
+
+                if (!string.IsNullOrEmpty(clientConfiguration.ProxyUsername))
+                {
+                    request.Proxy.Credentials = String.IsNullOrEmpty(clientConfiguration.ProxyDomain) ?
+                        new NetworkCredential(clientConfiguration.ProxyUsername, clientConfiguration.ProxyPassword ?? string.Empty) :
+                        new NetworkCredential(clientConfiguration.ProxyUsername, clientConfiguration.ProxyPassword ?? string.Empty,
+                                              clientConfiguration.ProxyDomain);
+                }
             }
         }
     }
