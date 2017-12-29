@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="auth\IamAuth.cs" />
+    <Compile Include="config\ClientConfiguration.cs" />
     <Compile Include="exception\ClientException.cs" />
     <Compile Include="config\SmnConfiguration.cs" />
     <Compile Include="http\HttpMethod.cs" />
