@@ -30,6 +30,7 @@ namespace Smn.Auth
     class IamAuth
     {
         private SmnConfiguration smnConfiguration;
+        private ClientConfiguration clientConfiguration;
         private string projectId;
         private string authToken;
         private long expiresTime;
@@ -41,6 +42,7 @@ namespace Smn.Auth
         public string AuthToken { get => authToken; set => authToken = value; }
         public long ExpiresTime { get => expiresTime; set => expiresTime = value; }
         public SmnConfiguration SmnConfiguration { get => smnConfiguration; set => smnConfiguration = value; }
+        public ClientConfiguration ClientConfiguration { get => clientConfiguration; set => clientConfiguration = value; }
 
         /// <summary>
         /// locker
@@ -73,7 +75,8 @@ namespace Smn.Auth
         {
             IamRequest request = new IamRequest();
             request.SmnConfiguration = smnConfiguration;
-            HttpWebResponse response = HttpTool.GetHttpResponse(request);
+            request.AddHeader("X-Smn-Sdk", smnConfiguration.GetUserAgent());
+            HttpWebResponse response = HttpTool.GetHttpResponse(request, clientConfiguration);
 
             string responseMessage = HttpTool.GetStream(response, Encoding.UTF8);
 

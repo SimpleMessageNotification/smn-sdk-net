@@ -32,6 +32,7 @@ namespace Smn.Request
         private SmnConfiguration smnConfiguration;
         private string projectId;
         private Dictionary<string, string> headers;
+        private int? timeout;
 
         [JsonIgnore]
         public SmnConfiguration SmnConfiguration { get => smnConfiguration; set => smnConfiguration = value; }
@@ -39,6 +40,8 @@ namespace Smn.Request
         public string ProjectId { get => projectId; set => projectId = value; }
         [JsonIgnore]
         public Dictionary<string, string> Headers { get => headers; set => headers = value; }
+        [JsonIgnore]
+        public int? Timeout { get => timeout; set => timeout = value; }
 
         public Encoding GetRequestEncoding()
         {
@@ -75,7 +78,7 @@ namespace Smn.Request
         /// <returns>timeout</returns>
         public int? GetTimeout()
         {
-            return null;
+            return timeout;
         }
 
         public virtual string GetBodyParams()
