@@ -66,7 +66,7 @@ namespace Smn.Request.Sms
                 throw new ArgumentException("message is null");
             }
 
-            if (string.IsNullOrEmpty(endpoint) || !ValidateUtil.ValidatePhone(endpoint))
+            if (string.IsNullOrEmpty(endpoint))
             {
                 throw new ArgumentException("endpoint is null or invalid");
             }

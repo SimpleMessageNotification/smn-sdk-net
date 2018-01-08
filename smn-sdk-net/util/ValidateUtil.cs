@@ -22,7 +22,7 @@ namespace Smn.Util
     ///</summary> 
     class ValidateUtil
     {
-        private static Regex PATTERN_TELTPHONE = new Regex("^\\+?[0-9]{1,31}");
+        private static Regex PATTERN_TELTPHONE = new Regex("^\\+?[0-9]{1}[0-9 /\\-]{1,31}$");
         private static Regex PATTERN_TOPIC_NAME = new Regex("^[a-zA-Z0-9]{1}[-_a-zA-Z0-9]{0,255}$");
         private static Regex PATTERN_SUBJECT = new Regex("^[^\\r\\n\\t\\f]+$");
         private static Regex PATTERN_TEMPLATE_NAME = new Regex("^[a-zA-Z0-9]{1}([-_a-zA-Z0-9]){0,64}");
