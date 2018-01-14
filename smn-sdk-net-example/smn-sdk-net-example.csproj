@@ -52,11 +52,13 @@
   <ItemGroup>
     <Compile Include="MessageTemplateDemo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublishDocDemo.cs" />
     <Compile Include="SmnMainDemo.cs" />
     <Compile Include="SmsDemo.cs" />
     <Compile Include="PublishDemo.cs" />
     <Compile Include="SubscriptionDemo.cs" />
     <Compile Include="TopicDemo.cs" />
+    <Compile Include="TopicDocDemo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
