@@ -19,7 +19,7 @@ namespace Smn.Util
     public class Constants
     {
         public const string HTTPS = "https://";
-        public const string ENDPOINT = "myhwclouds.com";
+        public const string ENDPOINT = "myhuaweicloud.com";
         public const string IAM = "iam";
         public const string SMN = "smn";
         public const string URL_DELIMITER = "/";
