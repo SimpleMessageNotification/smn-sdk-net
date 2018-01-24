@@ -10,7 +10,6 @@
  * Apache License, Version 2.0 for more details.
  */
 using Smn.Http;
-using Smn.Request;
 using System.Net;
 using System.Text;
 using Smn.Util;
@@ -19,6 +18,7 @@ using System;
 using Smn.Config;
 using Newtonsoft.Json.Linq;
 using Smn.Exceptions;
+using Smn.Request.Auth;
 
 namespace Smn.Auth
 {
@@ -75,6 +75,7 @@ namespace Smn.Auth
         {
             IamRequest request = new IamRequest();
             request.SmnConfiguration = smnConfiguration;
+            request.ClientConfiguration = clientConfiguration;
             request.AddHeader("X-Smn-Sdk", smnConfiguration.GetUserAgent());
             HttpWebResponse response = HttpTool.GetHttpResponse(request, clientConfiguration);
 

@@ -54,11 +54,23 @@ namespace Smn.Config
         /// </summary>
         private int? timeout;
 
+        /// <summary>
+        /// smn service host url ,default https://smn.{region}.myhuaweicloud.com
+        /// </summary>
+        private string smnHostUrl;
+
+        /// <summary>
+        /// iam service host url ,default https://iam.{region}.myhuaweicloud.com
+        /// </summary>
+        private string iamHostUrl;
+
         public string ProxyUsername { get => proxyUsername; set => proxyUsername = value; }
         public string ProxyPassword { get => proxyPassword; set => proxyPassword = value; }
         public string ProxyDomain { get => proxyDomain; set => proxyDomain = value; }
         public string ProxyHost { get => proxyHost; set => proxyHost = value; }
         public int? ProxyPort { get => proxyPort; set => proxyPort = value; }
         public int? Timeout { get => timeout; set => timeout = value; }
+        public string SmnHostUrl { get => smnHostUrl; set => smnHostUrl = value; }
+        public string IamHostUrl { get => iamHostUrl; set => iamHostUrl = value; }
     }
 }
