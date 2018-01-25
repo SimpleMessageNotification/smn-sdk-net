@@ -9,12 +9,12 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * Apache License, Version 2.0 for more details.
  */
-using System.Runtime.Serialization;
 using Smn.Http;
 using Smn.Response;
 using Smn.Util;
+using System;
 
-namespace Smn.Request
+namespace Smn.Request.Auth
 {
     ///<summary> 
     /// iam auth request message
@@ -35,7 +35,8 @@ namespace Smn.Request
 
         public override string GetUrl()
         {
-            return Constants.HTTPS + Constants.IAM + "." + SmnConfiguration.RegionName + "." + Constants.ENDPOINT + Constants.IAM_TOKEN_URI;
+            Console.WriteLine("{0}", GetIamServiceUrl());
+            return GetIamServiceUrl() + Constants.IAM_TOKEN_URI;
         }
 
         private string GetRequestMessage()

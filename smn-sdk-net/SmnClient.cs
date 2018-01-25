@@ -75,6 +75,7 @@ namespace Smn
             auth.GetTokenAndProjectId(out string projectId, out string authToken);
             AddCommonHeaders(httpRequest, authToken, projectId);
             httpRequest.SmnConfiguration = smnConfiguration;
+            httpRequest.ClientConfiguration = clientConfiguration;
             httpRequest.ProjectId = projectId;
             HttpWebResponse response = HttpTool.GetHttpResponse(httpRequest, this.clientConfiguration);
             return httpRequest.GetResponse(response);

@@ -54,7 +54,7 @@
     <Compile Include="http\HttpMethod.cs" />
     <Compile Include="http\HttpTool.cs" />
     <Compile Include="request\AbstractRequest.cs" />
-    <Compile Include="request\IamRequest.cs" />
+    <Compile Include="request\auth\IamRequest.cs" />
     <Compile Include="request\IHttpRequest.cs" />
     <Compile Include="request\publish\PublishWithTemplateRequest.cs" />
     <Compile Include="request\publish\PublishWithStructureRequest.cs" />
