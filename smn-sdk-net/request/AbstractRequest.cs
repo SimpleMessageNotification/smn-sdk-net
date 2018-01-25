@@ -30,6 +30,7 @@ namespace Smn.Request
     public abstract class AbstractRequest<T> : IHttpRequest where T : BaseResponse
     {
         private SmnConfiguration smnConfiguration;
+        private ClientConfiguration clientConfiguration;
         private string projectId;
         private Dictionary<string, string> headers;
         private int? timeout;
@@ -42,6 +43,7 @@ namespace Smn.Request
         public Dictionary<string, string> Headers { get => headers; set => headers = value; }
         [JsonIgnore]
         public int? Timeout { get => timeout; set => timeout = value; }
+        public ClientConfiguration ClientConfiguration { get => clientConfiguration; set => clientConfiguration = value; }
 
         public Encoding GetRequestEncoding()
         {
@@ -60,9 +62,23 @@ namespace Smn.Request
 
         public string GetSmnServiceUrl()
         {
-            return Constants.HTTPS + Constants.SMN + "." + SmnConfiguration.RegionName + "." + Constants.ENDPOINT;
+            if(clientConfiguration != null && !string.IsNullOrEmpty(clientConfiguration.SmnHostUrl))
+            {
+                return clientConfiguration.SmnHostUrl;
+            }
 
+            return Constants.HTTPS + Constants.SMN + "." + SmnConfiguration.RegionName + "." + Constants.ENDPOINT;
         }
+
+        public string GetIamServiceUrl()
+        {
+            if (clientConfiguration != null && !string.IsNullOrEmpty(clientConfiguration.IamHostUrl))
+            {
+                return clientConfiguration.IamHostUrl;
+            }
+            return Constants.HTTPS + Constants.IAM + "." + SmnConfiguration.RegionName + "." + Constants.ENDPOINT;
+        }
+
         public IDictionary<string, string> GetHeaders()
         {
             return headers;
