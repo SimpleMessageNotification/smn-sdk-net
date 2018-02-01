@@ -40,6 +40,22 @@ namespace Smn.Example
             SmsDemo smsDemo = new SmsDemo(smnClient);
             //sms publish
             smsDemo.SmsPublish();
+
+            // promotion sms publish
+            smsDemo.PromotionSmsPublish();
+
+            //list sms templates
+            smsDemo.ListSmsTemplates();
+
+            // create sms template
+            smsDemo.CreateSmsTemplate();
+
+            // delete sms template
+            smsDemo.DeleteSmsTemplate();
+
+            // get sms template detail
+            smsDemo.GetSmsTemplateDetail();
+
             // list sms sings
             smsDemo.ListSmsSigns();
             // delete sms sign
@@ -102,7 +118,6 @@ namespace Smn.Example
             messageTemplateDemo.ListMessageTemplates();
             // query message template detail 
             messageTemplateDemo.QueryMessageTemplateDetail();
-
         }
     }
 }
