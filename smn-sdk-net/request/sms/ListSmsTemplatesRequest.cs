@@ -20,6 +20,11 @@ using Smn.Util;
 
 namespace Smn.Request.Sms
 {
+    ///<summary> 
+    /// list sms template request message
+    /// author:zhangyx
+    /// version:1.0.1
+    ///</summary> 
     public class ListSmsTemplatesRequest : AbstractRequest<ListSmsTemplatesResponse>
     {
         /// <summary>
