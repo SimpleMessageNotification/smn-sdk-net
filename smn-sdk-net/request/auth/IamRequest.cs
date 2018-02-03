@@ -35,7 +35,6 @@ namespace Smn.Request.Auth
 
         public override string GetUrl()
         {
-            Console.WriteLine("{0}", GetIamServiceUrl());
             return GetIamServiceUrl() + Constants.IAM_TOKEN_URI;
         }
 
