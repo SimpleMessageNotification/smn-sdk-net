@@ -26,6 +26,7 @@ namespace Smn.Util
         private static Regex PATTERN_TOPIC_NAME = new Regex("^[a-zA-Z0-9]{1}[-_a-zA-Z0-9]{0,255}$");
         private static Regex PATTERN_SUBJECT = new Regex("^[^\\r\\n\\t\\f]+$");
         private static Regex PATTERN_TEMPLATE_NAME = new Regex("^[a-zA-Z0-9]{1}([-_a-zA-Z0-9]){0,64}");
+        private static Regex PATTERN_SMS_TEMPLATE_NAME = new Regex("^[\u4e00-\u9fa5-a-zA-Z0-9]{0,64}$");
         private const int MAX_DISPLAY_NAME_LENGTH = 192;
         private const int MAX_SUBJECT_LENGTH = 512;
         private const int MAX_MESSAGE_LENGTH = 256 * 1024;
@@ -203,6 +204,20 @@ namespace Smn.Util
             }
             Match mt = PATTERN_TEMPLATE_NAME.Match(tempateName);
             return mt.Success;
+        }
+
+        /// <summary>
+        /// validate sms template name
+        /// </summary>
+        /// <param name="tempateName">sms template name</param>
+        /// <returns>if match return true, else return false</returns>
+        public static bool ValidateSmsTemplateName(string tempateName)
+        {
+            if (string.IsNullOrEmpty(tempateName))
+            {
+                return false;
+            }
+            return PATTERN_SMS_TEMPLATE_NAME.IsMatch(tempateName);
         }
     }
 }

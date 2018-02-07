@@ -33,6 +33,8 @@ namespace Smn.Util
         public const string SMN_NOTIFICATIONS = "notifications";
         public const string SMN_SUB_PROTOCOL_SMS = "sms";
         public const string SMN_SIGN = "sms_sign";
+        public const string SMN_SMS_PROMOTION = "promotion";
+        public const string SMN_SMS_TEMPLATE = "sms_template";
         public const string SMS_REPORT = "report";
         public const string SMS_MESSAGE = "message";
         public const string CALLBACK = "callback";
