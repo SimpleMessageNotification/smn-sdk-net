@@ -45,7 +45,12 @@ namespace Smn.Request.Sms
         /// <summary>
         /// sms template type
         /// </summary>
-        private int smsTemplateType;
+        private int? smsTemplateType;
+
+        /// <summary>
+        /// status
+        /// </summary>
+        private int? status;
 
         [JsonProperty("offset")]
         public int Offset { get => offset; set => offset = value; }
@@ -54,7 +59,9 @@ namespace Smn.Request.Sms
         [JsonProperty("sms_template_name")]
         public string SmsTemplateName { get => smsTemplateName; set => smsTemplateName = value; }
         [JsonProperty("sms_template_type")]
-        public int SmsTemplateType { get => smsTemplateType; set => smsTemplateType = value; }
+        public int? SmsTemplateType { get => smsTemplateType; set => smsTemplateType = value; }
+        [JsonProperty("status")]
+        public int? Status { get => status; set => status = value; }
 
         public override HttpMethod GetHttpMethod()
         {
