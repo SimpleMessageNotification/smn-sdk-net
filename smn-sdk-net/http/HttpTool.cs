@@ -163,6 +163,16 @@ namespace Smn.Http
             }
         }
 
+        /// <summary>
+        /// judge whether the request is no permission
+        /// </summary>
+        /// <param name="response"response>response</param>
+        /// <returns></returns>
+        public static bool IsNoPermission(HttpWebResponse response)
+        {
+            return 403 == (int)response.StatusCode;
+        }
+
         private static void SetHttpProxy(HttpWebRequest request, ClientConfiguration clientConfiguration)
         {
             request.Proxy = null;

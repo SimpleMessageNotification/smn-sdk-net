@@ -78,6 +78,11 @@ namespace Smn
             httpRequest.ClientConfiguration = clientConfiguration;
             httpRequest.ProjectId = projectId;
             HttpWebResponse response = HttpTool.GetHttpResponse(httpRequest, this.clientConfiguration);
+            if(HttpTool.IsNoPermission(response))
+            {
+                // if no permission to clear the cache
+                CleanToken();
+            }
             return httpRequest.GetResponse(response);
         }
 
@@ -91,6 +96,17 @@ namespace Smn
             httpRequest.AddHeader("X-Auth-Token", token);
             httpRequest.AddHeader("X-Project-Id", projectId);
             httpRequest.AddHeader("X-Smn-Sdk", smnConfiguration.GetUserAgent());
+        }
+
+        /// <summary>
+        /// clean cache token
+        /// </summary>
+        public void CleanToken()
+        {
+            if (this.auth != null)
+            {
+                this.auth.CleanToken();
+            }
         }
     }
 }

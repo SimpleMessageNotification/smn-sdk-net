@@ -4,3 +4,7 @@
 2018-02-02 version 1.0.1:
 1.Add sms template
 2.Optimize code
+
+2018-03-16 version 1.0.2:
+1.Fix token cache
+2.Add batch send notifications and verfication code SMS

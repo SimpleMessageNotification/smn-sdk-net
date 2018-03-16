@@ -18,7 +18,7 @@ namespace Smn.Config
     ///</summary> 
     public class SmnConfiguration
     {
-        private string version = "1.0.1";
+        private string version = "1.0.2";
         private string username;
         private string domainName;
         private string password;
