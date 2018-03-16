@@ -44,6 +44,9 @@ namespace Smn.Example
             }
         }
 
+        /// <summary>
+        /// 批量发送通知类验证码类短信demo
+        /// </summary>
         public void SmsBatchPublish()
         {
             // 发送手机号码 号码格式 (+)(国家码)(手机号码)
