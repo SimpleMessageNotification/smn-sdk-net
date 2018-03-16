@@ -41,7 +41,12 @@ namespace Smn.Example
             //sms publish
             smsDemo.SmsPublish();
 
+            // sms batch pulish
+            // 批量发送通知验证码类短信
+            smsDemo.SmsBatchPublish();
+
             // promotion sms publish
+            // 批量发送推广类短信
             smsDemo.PromotionSmsPublish();
 
             //list sms templates

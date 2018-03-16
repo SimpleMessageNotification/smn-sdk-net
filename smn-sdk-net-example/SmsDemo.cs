@@ -24,7 +24,7 @@ namespace Smn.Example
             SmsPublishRequest request = new SmsPublishRequest
             {
                 // 发送手机号码 号码格式 (+)(国家码)(手机号码)
-                Endpoint = "+8613688807587",
+                Endpoint = "+861368****87",
                 // 短信签名必填,需要在消息通知服务的自助页面申请签名，申请办理时间约2天
                 SignId = "6be340e91e5241e4b5d85837e6709104",
                 Message = "您的验证码是:1234，请查收"
@@ -41,6 +41,49 @@ namespace Smn.Example
             {
                 // 处理异常
                 Console.WriteLine("{0}", e.Message);
+            }
+        }
+
+        public void SmsBatchPublish()
+        {
+            // 发送手机号码 号码格式 (+)(国家码)(手机号码)
+            List<string> endpoints = new List<string>();
+            endpoints.Add("8613*****87");
+            endpoints.Add("+8618****75");
+
+            // 设置请求对象
+            SmsBatchPublishRequest request = new SmsBatchPublishRequest
+            {
+                Endpoints = endpoints,
+                // 短信签名必填,需要在消息通知服务的自助页面申请签名，申请办理时间约2天
+                SignId = "6be340e91e5241e4b5d85837e6709104",
+                Message = "您的验证码是:1234，请查收"
+            };
+            try
+            {
+                // 发送请求并返回响应
+                SmsBatchPublishResponse response = smnClient.SendRequest(request);
+                if (response.IsSuccess())
+                {
+                    List<SmsBatchPublishResult> results = response.Result;
+                    foreach (SmsBatchPublishResult result in results)
+                    {
+                        Console.WriteLine("messageId={0}, endpoint={1}, code={2}, message={3}",
+                            result.MessageId, result.Endpoint, result.Code, result.Message);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("code={0}, message={1}, statusCode={2}",
+                        response.ErrCode, response.ErrMessage, response.StatusCode);
+                }
+                Console.ReadLine();
+            }
+            catch (Exception e)
+            {
+                // 处理异常
+                Console.WriteLine("{0}", e.Message);
+                Console.ReadLine();
             }
         }
 
