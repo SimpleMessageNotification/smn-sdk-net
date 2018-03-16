@@ -71,6 +71,14 @@ namespace Smn.Auth
             token = authToken;
         }
 
+        /// <summary>
+        /// clean cache token
+        /// </summary>
+        public void CleanToken()
+        {
+            this.authToken = null;
+        }
+
         private void PostForIamToken()
         {
             IamRequest request = new IamRequest();
