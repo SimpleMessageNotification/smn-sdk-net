@@ -23,24 +23,28 @@ namespace Smn.Example
             // 设置请求对象
             SmsPublishRequest request = new SmsPublishRequest
             {
-                // 发送手机号码 号码格式 (+)(国家码)(手机号码)
-                Endpoint = "+861368****87",
-                // 短信签名必填,需要在消息通知服务的自助页面申请签名，申请办理时间约2天
+                // MessageIncludeSignFlag默认为false，SignId必填，
+                // 为true时，可以不传SignId, 但是内容中必须包含签名,如【华为云】您的验证码是:1234，请查收。签名以【】括起来放在内容头部或者尾部
+                MessageIncludeSignFlag = false,
+                // 短信签名.需要在消息通知服务的自助页面申请签名，申请办理时间约2天
                 SignId = "6be340e91e5241e4b5d85837e6709104",
-                Message = "您的验证码是:1234，请查收"
+                // 发送手机号码 号码格式 (+)(国家码)(手机号码)
+                Endpoint = "+86136****587",
+                Message = "【华为企业云】您的验证码是:12345，请查收"
             };
             try
             {
                 // 发送请求并返回响应
                 SmsPublishResponse response = smnClient.SendRequest(request);
                 string result = response.MessageId;
-                Console.WriteLine("{0}", result);
+                Console.WriteLine("{0}， {1}", result, response.ErrMessage);
                 Console.ReadLine();
             }
             catch (Exception e)
             {
                 // 处理异常
                 Console.WriteLine("{0}", e.Message);
+                Console.ReadLine();
             }
         }
 
@@ -50,17 +54,21 @@ namespace Smn.Example
         public void SmsBatchPublish()
         {
             // 发送手机号码 号码格式 (+)(国家码)(手机号码)
-            List<string> endpoints = new List<string>();
-            endpoints.Add("8613*****87");
-            endpoints.Add("+8618****75");
+            List<string> endpoints = new List<string>
+            {
+                "86136*****87"
+            };
 
             // 设置请求对象
             SmsBatchPublishRequest request = new SmsBatchPublishRequest
             {
-                Endpoints = endpoints,
-                // 短信签名必填,需要在消息通知服务的自助页面申请签名，申请办理时间约2天
+                // MessageIncludeSignFlag默认为false，SignId必填，
+                // 为true时，可以不传SignId, 但是内容中必须包含签名,如【华为云】您的验证码是:1234，请查收。签名以【】括起来放在内容头部或者尾部
+                MessageIncludeSignFlag = false,
+                // 短信签名,需要在消息通知服务的自助页面申请签名，申请办理时间约2天
                 SignId = "6be340e91e5241e4b5d85837e6709104",
-                Message = "您的验证码是:1234，请查收"
+                Endpoints = endpoints,
+                Message = "你好，您的验证码是:12345679，请查收"
             };
             try
             {
