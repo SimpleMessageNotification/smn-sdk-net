@@ -42,12 +42,19 @@ namespace Smn.Request.Sms
         /// </summary>
         private String signId;
 
+        /// <summary>
+        /// message content contain sign flag
+        /// </summary>
+        private bool messageIncludeSignFlag = false;
+
         [JsonProperty("endpoint")]
         public string Endpoint { get => endpoint; set => endpoint = value; }
         [JsonProperty("message")]
         public string Message { get => message; set => message = value; }
         [JsonProperty("sign_id")]
         public string SignId { get => signId; set => signId = value; }
+        [JsonProperty("message_include_sign_flag")]
+        public bool MessageIncludeSignFlag { get => messageIncludeSignFlag; set => messageIncludeSignFlag = value; }        
 
         public override HttpMethod GetHttpMethod()
         {
@@ -56,14 +63,20 @@ namespace Smn.Request.Sms
 
         public override string GetUrl()
         {
-            if (string.IsNullOrEmpty(signId))
+            if (string.IsNullOrEmpty(message))
+            {
+                throw new ArgumentException("message is null");
+            }
+
+            if (!messageIncludeSignFlag && string.IsNullOrEmpty(signId))
             {
                 throw new ArgumentException("sign id is null");
             }
 
-            if (string.IsNullOrEmpty(message))
+            if (string.IsNullOrEmpty(signId) && messageIncludeSignFlag
+                && !ValidateUtil.ContainSignNameFromMessage(message))
             {
-                throw new ArgumentException("message is null");
+                throw new ArgumentException("message not include sign");
             }
 
             if (string.IsNullOrEmpty(endpoint))
