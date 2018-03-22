@@ -98,14 +98,85 @@ namespace Smn.Example
             }
         }
 
+        public void SmsBatchPublishWithDiffMessage()
+        {
+            SmsPublishMessage smsPublishMessage1 = new SmsPublishMessage()
+            {
+                MessageIncludeSignFlag = false,
+                // 短信签名,需要在消息通知服务的自助页面申请签名，申请办理时间约2天
+                SignId = "3fe9fae14729495990cf1a3218fe2aca",
+                Endpoint = "1368****87",
+                Message = "你好，您的验证码是:12345679，请查收"
+            };
+
+            SmsPublishMessage smsPublishMessage2 = new SmsPublishMessage()
+            {
+                // MessageIncludeSignFlag默认为false，SignId必填，
+                // 为true时，可以不传SignId, 但是内容中必须包含签名,如【华为云】您的验证码是:1234，请查收。签名以【】括起来放在内容头部或者尾部
+                MessageIncludeSignFlag = true,
+                // 短信签名,需要在消息通知服务的自助页面申请签名，申请办理时间约2天
+                Endpoint = "186****875",
+                Message = "【华为云华南测试】你好，您的验证码是:1234567，请查收"
+            };
+
+            SmsPublishMessage smsPublishMessage3 = new SmsPublishMessage()
+            {
+                MessageIncludeSignFlag = false,
+                // 短信签名,需要在消息通知服务的自助页面申请签名，申请办理时间约2天
+                SignId = "6be340e91e5241e4b5d85837e6709104",
+                Endpoint = "12345a bdd",
+                Message = "你好，您的验证码是:1234567，请查收"
+            };
+
+            List<SmsPublishMessage> smsMessages = new List<SmsPublishMessage>
+            {
+                smsPublishMessage1,
+                smsPublishMessage2,
+                smsPublishMessage3
+            };
+            SmsBatchPublishWithDiffMessageRequest request = new SmsBatchPublishWithDiffMessageRequest()
+            {
+                SmsMessages = smsMessages
+            };
+
+            try
+            {
+                // 发送请求并返回响应
+                SmsBatchPublishWithDiffMessageResponse response = smnClient.SendRequest(request);
+                if (response.IsSuccess())
+                {
+                    List<SmsBatchPublishWithDiffMessageResult> results = response.Result;
+                    foreach (SmsBatchPublishWithDiffMessageResult result in results)
+                    {
+                        Console.WriteLine("messageId={0}, endpoint={1}, code={2}, message={3}",
+                            result.MessageId, result.Endpoint, result.Code, result.Message);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("code={0}, message={1}, statusCode={2}",
+                        response.ErrCode, response.ErrMessage, response.StatusCode);
+                }
+                Console.ReadLine();
+            }
+            catch (Exception e)
+            {
+                // 处理异常
+                Console.WriteLine("{0}", e.Message);
+                Console.ReadLine();
+            }
+        }
+
         /// <summary>
         /// 发送短信推广类
         /// </summary>
         public void PromotionSmsPublish()
         {
             // 发送手机号码 号码格式 (+)(国家码)(手机号码)
-            List<string> endpoints = new List<string>();
-            endpoints.Add("8613688807587");
+            List<string> endpoints = new List<string>
+            {
+                "8613688807587"
+            };
             // 设置请求对象
             PromotionSmsPublishRequest request = new PromotionSmsPublishRequest
             {
