@@ -45,6 +45,9 @@ namespace Smn.Example
             // 批量发送通知验证码类短信
             smsDemo.SmsBatchPublish();
 
+            // 批量发送不同内容的通知验证码类短信
+            smsDemo.SmsBatchPublishWithDiffMessage();
+
             // promotion sms publish
             // 批量发送推广类短信
             smsDemo.PromotionSmsPublish();

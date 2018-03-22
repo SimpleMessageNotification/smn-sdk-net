@@ -22,6 +22,8 @@ namespace Smn.Util
     ///</summary> 
     class ValidateUtil
     {
+        public const int MAX_SMS_BATCH_PUBLISH_SIZE = 1000;
+
         private static Regex PATTERN_TELTPHONE = new Regex("^\\+?[0-9]{1}[0-9 /\\-]{1,31}$");
         private static Regex PATTERN_TOPIC_NAME = new Regex("^[a-zA-Z0-9]{1}[-_a-zA-Z0-9]{0,255}$");
         private static Regex PATTERN_SUBJECT = new Regex("^[^\\r\\n\\t\\f]+$");
