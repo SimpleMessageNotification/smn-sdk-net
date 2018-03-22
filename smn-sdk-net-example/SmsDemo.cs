@@ -29,7 +29,7 @@ namespace Smn.Example
                 // 短信签名.需要在消息通知服务的自助页面申请签名，申请办理时间约2天
                 SignId = "6be340e91e5241e4b5d85837e6709104",
                 // 发送手机号码 号码格式 (+)(国家码)(手机号码)
-                Endpoint = "+86136****587",
+                Endpoint = "86136*****87",
                 Message = "【华为企业云】您的验证码是:12345，请查收"
             };
             try
@@ -105,7 +105,7 @@ namespace Smn.Example
                 MessageIncludeSignFlag = false,
                 // 短信签名,需要在消息通知服务的自助页面申请签名，申请办理时间约2天
                 SignId = "3fe9fae14729495990cf1a3218fe2aca",
-                Endpoint = "1368****87",
+                Endpoint = "86136*****87",
                 Message = "你好，您的验证码是:12345679，请查收"
             };
 
@@ -115,24 +115,14 @@ namespace Smn.Example
                 // 为true时，可以不传SignId, 但是内容中必须包含签名,如【华为云】您的验证码是:1234，请查收。签名以【】括起来放在内容头部或者尾部
                 MessageIncludeSignFlag = true,
                 // 短信签名,需要在消息通知服务的自助页面申请签名，申请办理时间约2天
-                Endpoint = "186****875",
+                Endpoint = "86186****875",
                 Message = "【华为云华南测试】你好，您的验证码是:1234567，请查收"
-            };
-
-            SmsPublishMessage smsPublishMessage3 = new SmsPublishMessage()
-            {
-                MessageIncludeSignFlag = false,
-                // 短信签名,需要在消息通知服务的自助页面申请签名，申请办理时间约2天
-                SignId = "6be340e91e5241e4b5d85837e6709104",
-                Endpoint = "12345a bdd",
-                Message = "你好，您的验证码是:1234567，请查收"
             };
 
             List<SmsPublishMessage> smsMessages = new List<SmsPublishMessage>
             {
                 smsPublishMessage1,
-                smsPublishMessage2,
-                smsPublishMessage3
+                smsPublishMessage2
             };
             SmsBatchPublishWithDiffMessageRequest request = new SmsBatchPublishWithDiffMessageRequest()
             {
@@ -175,7 +165,7 @@ namespace Smn.Example
             // 发送手机号码 号码格式 (+)(国家码)(手机号码)
             List<string> endpoints = new List<string>
             {
-                "8613688807587"
+                "86136*****87"
             };
             // 设置请求对象
             PromotionSmsPublishRequest request = new PromotionSmsPublishRequest
