@@ -22,6 +22,8 @@ namespace Smn.Util
     ///</summary> 
     class ValidateUtil
     {
+        public const int MAX_SMS_BATCH_PUBLISH_SIZE = 1000;
+
         private static Regex PATTERN_TELTPHONE = new Regex("^\\+?[0-9]{1}[0-9 /\\-]{1,31}$");
         private static Regex PATTERN_TOPIC_NAME = new Regex("^[a-zA-Z0-9]{1}[-_a-zA-Z0-9]{0,255}$");
         private static Regex PATTERN_SUBJECT = new Regex("^[^\\r\\n\\t\\f]+$");
@@ -31,6 +33,9 @@ namespace Smn.Util
         private const int MAX_SUBJECT_LENGTH = 512;
         private const int MAX_MESSAGE_LENGTH = 256 * 1024;
         private const int MAX_TEMPLATE_CONTENT  = 256 * 1024;
+        private const int SIGN_MAX_LENGTH = 10;
+        private const char SIGNLABEL_CH_LEFT = '【';
+        private const char SIGNLABEL_CH_RIGHT = '】';
 
         /// <summary>
         /// validate phone
@@ -218,6 +223,47 @@ namespace Smn.Util
                 return false;
             }
             return PATTERN_SMS_TEMPLATE_NAME.IsMatch(tempateName);
+        }
+
+        /// <summary>
+        /// validate message contain sign name
+        /// </summary>
+        /// <param name="message">message Content</param>
+        /// <returns>if match return true, else return false</returns>
+        public static bool ContainSignNameFromMessage(String message)
+        {
+            if (string.IsNullOrEmpty(message) || message.Length < 4)
+            {
+                return false;
+            }
+
+            int scanLegth = message.Length > SIGN_MAX_LENGTH ? SIGN_MAX_LENGTH : message.Length;
+
+            // scan head
+            char[] chars = message.ToCharArray();
+            if (chars[0] == SIGNLABEL_CH_LEFT)
+            {
+                for (int i = 1; i < scanLegth; i++)
+                {
+                    if (chars[i] == SIGNLABEL_CH_RIGHT)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            // scan tail
+            if (chars[message.Length - 1] == SIGNLABEL_CH_RIGHT)
+            {
+                for (int i = message.Length - 2; i > message.Length - scanLegth - 1; i--)
+                {
+                    if (chars[i] == SIGNLABEL_CH_LEFT)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }

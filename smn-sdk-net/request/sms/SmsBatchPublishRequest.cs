@@ -34,12 +34,17 @@ namespace Smn.Request.Sms
         /// <summary>
         /// message content
         /// </summary>
-        private String message;
+        private string message;
 
         /// <summary>
         /// sms signature id
         /// </summary>
         private string signId;
+
+        /// <summary>
+        /// message content contain sign flag
+        /// </summary>
+        private bool messageIncludeSignFlag = false;
 
         [JsonProperty("endpoints")]
         public List<string> Endpoints { get => endpoints; set => endpoints = value; }
@@ -47,6 +52,8 @@ namespace Smn.Request.Sms
         public string SignId { get => signId; set => signId = value; }
         [JsonProperty("message")]
         public string Message { get => message; set => message = value; }
+        [JsonProperty("message_include_sign_flag")]
+        public bool MessageIncludeSignFlag { get => messageIncludeSignFlag; set => messageIncludeSignFlag = value; }
 
         public override HttpMethod GetHttpMethod()
         {
@@ -55,14 +62,20 @@ namespace Smn.Request.Sms
 
         public override string GetUrl()
         {
-            if (string.IsNullOrEmpty(signId))
+            if (string.IsNullOrEmpty(message))
+            {
+                throw new ArgumentException("message is empty");
+            }
+
+            if (!messageIncludeSignFlag && string.IsNullOrEmpty(signId))
             {
                 throw new ArgumentException("sign id is null");
             }
 
-            if (string.IsNullOrEmpty(message))
+            if (string.IsNullOrEmpty(signId) && messageIncludeSignFlag
+                && !ValidateUtil.ContainSignNameFromMessage(message))
             {
-                throw new ArgumentException("message is empty");
+                throw new ArgumentException("message not include sign");
             }
 
             if (endpoints == null || endpoints.Count == 0)

@@ -65,6 +65,7 @@
     <Compile Include="request\sms\ListSmsTemplatesRequest.cs" />
     <Compile Include="request\sms\SmsBatchPublishRequest.cs" />
     <Compile Include="request\sms\PromotionSmsPublishRequest.cs" />
+    <Compile Include="request\sms\SmsBatchPublishWithDiffMessageRequest.cs" />
     <Compile Include="request\subscription\ListSubscriptionsByTopicRequest.cs" />
     <Compile Include="request\subscription\ListSubscriptionsRequest.cs" />
     <Compile Include="request\subscription\SubscribeRequest.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="response\sms\ListSmsMsgReportResponse.cs" />
     <Compile Include="response\sms\ListSmsSignsResponse.cs" />
     <Compile Include="response\sms\ListSmsTemplatesResponse.cs" />
+    <Compile Include="response\sms\SmsBatchPublishWithDiffMessageResponse.cs" />
     <Compile Include="response\sms\SmsBatchPublishResponse.cs" />
     <Compile Include="response\sms\PromotionSmsPublishResponse.cs" />
     <Compile Include="response\sms\SmsPublishResponse.cs" />

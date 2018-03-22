@@ -170,7 +170,7 @@ namespace Smn.Http
         /// <returns></returns>
         public static bool IsNoPermission(HttpWebResponse response)
         {
-            return 403 == (int)response.StatusCode;
+            return 403 == (int)response.StatusCode || 401 == (int)response.StatusCode;
         }
 
         private static void SetHttpProxy(HttpWebRequest request, ClientConfiguration clientConfiguration)
