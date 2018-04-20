@@ -77,14 +77,17 @@ namespace Smn.Http
             #endregion add header
 
             #region post json
-            if ((httpMethod == HttpMethod.POST || httpMethod == HttpMethod.PUT)
-                && !string.IsNullOrEmpty(httpRequest.GetBodyParams()))
+            if (httpMethod == HttpMethod.POST || httpMethod == HttpMethod.PUT)
             {
-                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                string bodyParams = httpRequest.GetBodyParams();
+                if (!string.IsNullOrEmpty(bodyParams))
                 {
-                    streamWriter.Write(httpRequest.GetBodyParams());
-                    streamWriter.Flush();
-                    streamWriter.Close();
+                    using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                    {
+                        streamWriter.Write(bodyParams);
+                        streamWriter.Flush();
+                        streamWriter.Close();
+                    }
                 }
             }
             #endregion post json

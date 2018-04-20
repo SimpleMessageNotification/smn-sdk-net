@@ -43,6 +43,7 @@ namespace Smn.Request
         public Dictionary<string, string> Headers { get => headers; set => headers = value; }
         [JsonIgnore]
         public int? Timeout { get => timeout; set => timeout = value; }
+        [JsonIgnore]
         public ClientConfiguration ClientConfiguration { get => clientConfiguration; set => clientConfiguration = value; }
 
         public Encoding GetRequestEncoding()

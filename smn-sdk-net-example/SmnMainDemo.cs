@@ -15,10 +15,11 @@ namespace Smn.Example
         {
             // 初始化client
             smnClient = new SmnClient(
-                "YourUserName",
-                "YourDomainName",
-                "YourPlainPassword",
-                "YourRegionName");
+               "YourUserName",
+               "YourDomainName",
+               "YourPlainPassword",
+               "YourRegionName");
+
 
             // if you want to customize the HTTP parameters,
             // or use http proxy, you can use like this
