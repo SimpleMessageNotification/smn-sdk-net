@@ -50,7 +50,7 @@ namespace Smn.Example
                 Title = "彩信测试1234",
                 Endpoints = new List<string>
                 {
-                  "13688807587", "17727904831"
+                  "136*****87", "1772*****31"
                 },
                 SignId = "3e863eac748b417c98795ec3c7f2887c",
                 MmsMessage = new List<MmsFrame>
