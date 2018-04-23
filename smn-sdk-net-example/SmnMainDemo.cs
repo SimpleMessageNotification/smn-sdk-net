@@ -20,7 +20,6 @@ namespace Smn.Example
                "YourPlainPassword",
                "YourRegionName");
 
-
             // if you want to customize the HTTP parameters,
             // or use http proxy, you can use like this
             //ClientConfiguration configuration = new ClientConfiguration
@@ -37,6 +36,10 @@ namespace Smn.Example
             //    "YourPlainPassword",
             //    "YourRegionName",
             //    configuration);
+            MmsDemo mmsDemo = new MmsDemo(smnClient);
+            // send mms
+            // 发送彩信
+            mmsDemo.MmsPublish();
 
             SmsDemo smsDemo = new SmsDemo(smnClient);
             //sms publish
