@@ -41,95 +41,95 @@ namespace Smn.Example
             // 发送彩信
             mmsDemo.MmsPublish();
 
-            smsdemo smsdemo = new smsdemo(smnclient);
+            SmsDemo smsDemo = new SmsDemo(smnClient);
             //sms publish
-            smsdemo.smspublish();
+            smsDemo.SmsPublish();
 
             // sms batch pulish
             // 批量发送通知验证码类短信
-            smsdemo.smsbatchpublish();
+            smsDemo.SmsBatchPublish();
 
             // 批量发送不同内容的通知验证码类短信
-            smsdemo.smsbatchpublishwithdiffmessage();
+            smsDemo.SmsBatchPublishWithDiffMessage();
 
             // promotion sms publish
             // 批量发送推广类短信
-            smsdemo.promotionsmspublish();
+            smsDemo.PromotionSmsPublish();
 
             //list sms templates
-            smsdemo.listsmstemplates();
+            smsDemo.ListSmsTemplates();
 
             // create sms template
-            smsdemo.createsmstemplate();
+            smsDemo.CreateSmsTemplate();
 
             // delete sms template
-            smsdemo.deletesmstemplate();
+            smsDemo.DeleteSmsTemplate();
 
             // get sms template detail
-            smsdemo.getsmstemplatedetail();
+            smsDemo.GetSmsTemplateDetail();
 
             // list sms sings
-            smsdemo.listsmssigns();
+            smsDemo.ListSmsSigns();
             // delete sms sign
-            smsdemo.deletesmssign();
+            smsDemo.DeleteSmsSign();
             // list sms msg report
-            smsdemo.listsmsmsgreport();
+            smsDemo.ListSmsMsgReport();
             // get sended sms messsage content
-            smsdemo.getsmsmessage();
+            smsDemo.GetSmsMessage();
             //list sms event
-            smsdemo.listsmsevent();
+            smsDemo.ListSmsEvent();
             //update sms event
-            smsdemo.updatesmsevent();
+            smsDemo.UpdateSmsEvent();
 
-            topicdemo topicdemo = new topicdemo(smnclient);
+            TopicDemo topicDemo = new TopicDemo(smnClient);
             // create topic
-            topicdemo.createtopic();
+            topicDemo.CreateTopic();
             // update topic
-            topicdemo.updatetopic();
+            topicDemo.UpdateTopic();
             // query topic detail
-            topicdemo.querytopicdetail();
+            topicDemo.QueryTopicDetail();
             // list topics
-            topicdemo.listtopics();
+            topicDemo.ListTopics();
             // delete topic
-            topicdemo.deletetopic();
+            topicDemo.DeleteTopic();
             // update topic attribute
-            topicdemo.updatetopicattribute();
+            topicDemo.UpdateTopicAttribute();
             //list topic attributes
-            topicdemo.listtopicattributes();
+            topicDemo.ListTopicAttributes();
             // delete all topic attributes
-            topicdemo.deletetopicattributes();
+            topicDemo.DeleteTopicAttributes();
             // delete topic attribute by name
-            topicdemo.deletetopicattributebyname();
+            topicDemo.DeleteTopicAttributeByName();
 
-            publishdemo publishdemo = new publishdemo(smnclient);
+            PublishDemo publishDemo = new PublishDemo(smnClient);
             // publish message 
-            publishdemo.publishwithmessage();
+            publishDemo.PublishWithMessage();
             // publish with message structure
-            publishdemo.publishwithmessagestructure();
+            publishDemo.PublishWithMessageStructure();
             // publish with message template
-            publishdemo.publishwithmessagetemplate();
+            publishDemo.PublishWithMessageTemplate();
 
-            subscriptiondemo subscriptiondemo = new subscriptiondemo(smnclient);
+            SubscriptionDemo subscriptionDemo = new SubscriptionDemo(smnClient);
             // list subscriptions
-            subscriptiondemo.listsubscriptions();
+            subscriptionDemo.ListSubscriptions();
             // list subscriptions by topic
-            subscriptiondemo.listsubscriptionsbytopic();
-            // unsubscribe
-            subscriptiondemo.unsubscribe();
-            // subscribe
-            subscriptiondemo.subscribe();
+            subscriptionDemo.ListSubscriptionsByTopic();
+            // Unsubscribe
+            subscriptionDemo.Unsubscribe();
+            // Subscribe
+            subscriptionDemo.Subscribe();
 
-            messagetemplatedemo messagetemplatedemo = new messagetemplatedemo(smnclient);
+            MessageTemplateDemo messageTemplateDemo = new MessageTemplateDemo(smnClient);
             // create message template
-            messagetemplatedemo.createmessagetemplate();
+            messageTemplateDemo.CreateMessageTemplate();
             // delete message template 
-            messagetemplatedemo.deletemessagetemplate();
+            messageTemplateDemo.DeleteMessageTemplate();
             // update message template
-            messagetemplatedemo.updatemessagetemplate();
+            messageTemplateDemo.UpdateMessageTemplate();
             // list message templates
-            messagetemplatedemo.listmessagetemplates();
+            messageTemplateDemo.ListMessageTemplates();
             // query message template detail 
-            messagetemplatedemo.querymessagetemplatedetail();
+            messageTemplateDemo.QueryMessageTemplateDetail();
         }
     }
 }
