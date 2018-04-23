@@ -229,9 +229,9 @@ namespace Smn.Example
                 Endpoint = "86136******87",
                 Message = "你好，营销推广短信测试，请查收, 退订回T",
                 //// 可选字段，扩展码，短信状态通知时会返回
-                ExtendCode = "extendCodeTest5",
-                // 可选字段，短信发送方号码的扩展字段，仅限可自定义扩展的签名使用
-                ExtendSrcId = "123"
+                //ExtendCode = "extendCodeTest5",
+                //// 可选字段，短信发送方号码的扩展字段，仅限可自定义扩展的签名使用
+                //ExtendSrcId = "123"
             };
 
             PromotionSmsPublishMessage smsPublishMessage2 = new PromotionSmsPublishMessage()
