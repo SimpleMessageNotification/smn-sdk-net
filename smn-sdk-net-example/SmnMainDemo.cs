@@ -36,10 +36,6 @@ namespace Smn.Example
             //    "YourPlainPassword",
             //    "YourRegionName",
             //    configuration);
-            MmsDemo mmsDemo = new MmsDemo(smnClient);
-            // send mms
-            // 发送彩信
-            mmsDemo.MmsPublish();
 
             SmsDemo smsDemo = new SmsDemo(smnClient);
             //sms publish
@@ -55,6 +51,9 @@ namespace Smn.Example
             // promotion sms publish
             // 批量发送推广类短信
             smsDemo.PromotionSmsPublish();
+
+            // 批量发送不同内容的推广类短信
+            smsDemo.PromotionSmsBatchPublishWithDiffMessage();
 
             //list sms templates
             smsDemo.ListSmsTemplates();
@@ -130,6 +129,11 @@ namespace Smn.Example
             messageTemplateDemo.ListMessageTemplates();
             // query message template detail 
             messageTemplateDemo.QueryMessageTemplateDetail();
+
+            //MmsDemo mmsDemo = new MmsDemo(smnClient);
+            //// send mms
+            //// 发送彩信
+            //mmsDemo.MmsPublish();
         }
     }
 }
