@@ -12,3 +12,8 @@
 2018-03-22 version 1.0.3
 1. SmsPublish and SmsBatchPublish add parameter message_include_sign_flag
 2. Add SmsBatchPublishWithDiffMessage
+
+2018-04-23 version 1.0.4
+1. Add mms publish
+2. Add PromotionSmsBatchPublishWithDiffMessage
+3. Add extend_src_id and extend_code

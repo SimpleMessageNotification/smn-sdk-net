@@ -30,7 +30,11 @@ namespace Smn.Example
                 SignId = "6be340e91e5241e4b5d85837e6709104",
                 // 发送手机号码 号码格式 (+)(国家码)(手机号码)
                 Endpoint = "86136*****87",
-                Message = "【华为企业云】您的验证码是:12345，请查收"
+                Message = "【华为企业云】您的验证码是:1234567，请查收",
+                //// 可选字段，扩展码，短信状态通知时会返回
+                //ExtendCode = "extendCodeTest",
+                //// 可选字段，短信发送方号码的扩展字段，仅限可自定义扩展的签名使用
+                //ExtendSrcId = "123"
             };
             try
             {
@@ -56,7 +60,7 @@ namespace Smn.Example
             // 发送手机号码 号码格式 (+)(国家码)(手机号码)
             List<string> endpoints = new List<string>
             {
-                "86136*****87"
+                "86136*****587"
             };
 
             // 设置请求对象
@@ -68,12 +72,17 @@ namespace Smn.Example
                 // 短信签名,需要在消息通知服务的自助页面申请签名，申请办理时间约2天
                 SignId = "6be340e91e5241e4b5d85837e6709104",
                 Endpoints = endpoints,
-                Message = "你好，您的验证码是:12345679，请查收"
+                Message = "你好，您的验证码是:12345679，请查收",
+                //// 可选字段，扩展码，短信状态通知时会返回
+                //ExtendCode = "extendCodeTest2",
+                //// 可选字段，短信发送方号码的扩展字段，仅限可自定义扩展的签名使用
+                //ExtendSrcId = "123"
             };
             try
             {
                 // 发送请求并返回响应
                 SmsBatchPublishResponse response = smnClient.SendRequest(request);
+                Console.WriteLine(request.GetBodyParams());
                 if (response.IsSuccess())
                 {
                     List<SmsBatchPublishResult> results = response.Result;
@@ -98,15 +107,22 @@ namespace Smn.Example
             }
         }
 
+        /// <summary>
+        /// 根据内容批量发送通知类短信
+        /// </summary>
         public void SmsBatchPublishWithDiffMessage()
         {
             SmsPublishMessage smsPublishMessage1 = new SmsPublishMessage()
             {
                 MessageIncludeSignFlag = false,
                 // 短信签名,需要在消息通知服务的自助页面申请签名，申请办理时间约2天
-                SignId = "3fe9fae14729495990cf1a3218fe2aca",
-                Endpoint = "86136*****87",
-                Message = "你好，您的验证码是:12345679，请查收"
+                SignId = "6be340e91e5241e4b5d85837e6709104",
+                Endpoint = "86136****587",
+                Message = "你好，您的验证码是:12345672，请查收",
+                //// 可选字段，扩展码，短信状态通知时会返回
+                //ExtendCode = "extendCodeTest3",
+                //// 可选字段，短信发送方号码的扩展字段，仅限可自定义扩展的签名使用
+                //ExtendSrcId = "123"
             };
 
             SmsPublishMessage smsPublishMessage2 = new SmsPublishMessage()
@@ -115,8 +131,8 @@ namespace Smn.Example
                 // 为true时，可以不传SignId, 但是内容中必须包含签名,如【华为云】您的验证码是:1234，请查收。签名以【】括起来放在内容头部或者尾部
                 MessageIncludeSignFlag = true,
                 // 短信签名,需要在消息通知服务的自助页面申请签名，申请办理时间约2天
-                Endpoint = "86186****875",
-                Message = "【华为云华南测试】你好，您的验证码是:1234567，请查收"
+                Endpoint = "86136******587",
+                Message = "【华为企业云】你好，您的验证码是:12345671，请查收"
             };
 
             List<SmsPublishMessage> smsMessages = new List<SmsPublishMessage>
@@ -173,7 +189,11 @@ namespace Smn.Example
                 Endpoints = endpoints,
                 // 短信签名必填,需要在消息通知服务的自助页面申请签名，申请办理时间约2天
                 SignId = "47f86cf7c9a7449d98ee61cf193a1060",
-                SmsTemplateId = "bfda25c6406e42ddabad74b4a20f6d05"
+                SmsTemplateId = "0d98ad57c4e64f1ca8b76c1d4c9b221a",
+                //// 可选字段，扩展码，短信状态通知时会返回
+                //ExtendCode = "extendCodeTest4",
+                //// 可选字段，短信发送方号码的扩展字段，仅限可自定义扩展的签名使用
+                //ExtendSrcId = "123"
             };
             try
             {
@@ -184,6 +204,73 @@ namespace Smn.Example
                 {
                     Console.WriteLine("messageId={0}, endpoint={1}, code={2}, message={3}",
                         result.MessageId, result.Endpoint, result.Code, result.Message);
+                }
+                Console.ReadLine();
+            }
+            catch (Exception e)
+            {
+                // 处理异常
+                Console.WriteLine("{0}", e.Message);
+                Console.ReadLine();
+            }
+        }
+
+        /// <summary>
+        /// 根据内容批量发送推广类短信
+        /// 该接口当前有权限控制，如需使用请联系华为云客服申请
+        /// </summary>
+        public void PromotionSmsBatchPublishWithDiffMessage()
+        {
+            PromotionSmsPublishMessage smsPublishMessage1 = new PromotionSmsPublishMessage()
+            {
+                MessageIncludeSignFlag = false,
+                // 短信签名,需要在消息通知服务的自助页面申请签名，申请办理时间约2天
+                SignId = "47f86cf7c9a7449d98ee61cf193a1060",
+                Endpoint = "86136******87",
+                Message = "你好，营销推广短信测试，请查收, 退订回T",
+                //// 可选字段，扩展码，短信状态通知时会返回
+                //ExtendCode = "extendCodeTest5",
+                //// 可选字段，短信发送方号码的扩展字段，仅限可自定义扩展的签名使用
+                //ExtendSrcId = "123"
+            };
+
+            PromotionSmsPublishMessage smsPublishMessage2 = new PromotionSmsPublishMessage()
+            {
+                // MessageIncludeSignFlag默认为false，SignId必填，
+                // 为true时，可以不传SignId, 但是内容中必须包含签名,如【华为云】您的验证码是:1234，请查收。签名以【】括起来放在内容头部或者尾部
+                MessageIncludeSignFlag = true,
+                // 短信签名,需要在消息通知服务的自助页面申请签名，申请办理时间约2天
+                Endpoint = "86136******87",
+                Message = "【华为云华北推广】你好，您的验证城管码是:12345671，请查收,退订回T"
+            };
+
+            List<PromotionSmsPublishMessage> smsMessages = new List<PromotionSmsPublishMessage>
+            {
+                smsPublishMessage1,
+                smsPublishMessage2
+            };
+            PromotionSmsPublishWithDiffMessageRequest request = new PromotionSmsPublishWithDiffMessageRequest()
+            {
+                SmsMessages = smsMessages
+            };
+
+            try
+            {
+                // 发送请求并返回响应
+                PromotionSmsPublishWithDiffMessageResponse response = smnClient.SendRequest(request);
+                if (response.IsSuccess())
+                {
+                    List<PromotionSmsBatchResult> results = response.Result;
+                    foreach (PromotionSmsBatchResult result in results)
+                    {
+                        Console.WriteLine("messageId={0}, endpoint={1}, code={2}, message={3}, sensitiveWord={4}",
+                            result.MessageId, result.Endpoint, result.Code, result.Message, result.SensitiveWord);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("code={0}, message={1}, statusCode={2}",
+                        response.ErrCode, response.ErrMessage, response.StatusCode);
                 }
                 Console.ReadLine();
             }

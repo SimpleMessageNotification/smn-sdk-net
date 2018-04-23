@@ -56,6 +56,7 @@
     <Compile Include="request\AbstractRequest.cs" />
     <Compile Include="request\auth\IamRequest.cs" />
     <Compile Include="request\IHttpRequest.cs" />
+    <Compile Include="request\mms\MmsPublishRequest.cs" />
     <Compile Include="request\publish\PublishWithTemplateRequest.cs" />
     <Compile Include="request\publish\PublishWithStructureRequest.cs" />
     <Compile Include="request\publish\PublishRequest.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="request\sms\DeleteSmsTemplateRequest.cs" />
     <Compile Include="request\sms\GetSmsTemplateDetailRequest.cs" />
     <Compile Include="request\sms\ListSmsTemplatesRequest.cs" />
+    <Compile Include="request\sms\PromotionSmsPublishWithDiffMessageRequest.cs" />
     <Compile Include="request\sms\SmsBatchPublishRequest.cs" />
     <Compile Include="request\sms\PromotionSmsPublishRequest.cs" />
     <Compile Include="request\sms\SmsBatchPublishWithDiffMessageRequest.cs" />
@@ -93,6 +95,7 @@
     <Compile Include="request\sms\UpdateSmsEventRequest.cs" />
     <Compile Include="response\BaseResponse.cs" />
     <Compile Include="response\IamRepsonse.cs" />
+    <Compile Include="response\mms\MmsPublishResponse.cs" />
     <Compile Include="response\publish\PublishResponse.cs" />
     <Compile Include="response\sms\CreateSmsTemplateResponse.cs" />
     <Compile Include="response\sms\DeleteSmsSignResponse.cs" />
@@ -103,6 +106,7 @@
     <Compile Include="response\sms\ListSmsMsgReportResponse.cs" />
     <Compile Include="response\sms\ListSmsSignsResponse.cs" />
     <Compile Include="response\sms\ListSmsTemplatesResponse.cs" />
+    <Compile Include="response\sms\PromotionSmsPublishWithDiffMessageResponse.cs" />
     <Compile Include="response\sms\SmsBatchPublishWithDiffMessageResponse.cs" />
     <Compile Include="response\sms\SmsBatchPublishResponse.cs" />
     <Compile Include="response\sms\PromotionSmsPublishResponse.cs" />
@@ -131,6 +135,7 @@
     <Compile Include="util\Constants.cs" />
     <Compile Include="util\DateUtil.cs" />
     <Compile Include="util\JsonUtil.cs" />
+    <Compile Include="util\MmsFileType.cs" />
     <Compile Include="util\ProtocolType.cs" />
     <Compile Include="util\ValidateUtil.cs" />
   </ItemGroup>
