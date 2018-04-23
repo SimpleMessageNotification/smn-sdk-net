@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (C) 2017. Huawei Technologies Co., LTD. All rights reserved.
+ * Copyright (C) 2018. Huawei Technologies Co., LTD. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of Apache License, Version 2.0.
@@ -9,30 +9,31 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * Apache License, Version 2.0 for more details.
  */
-using Smn.Http;
-using System;
-using System.Text;
-using Smn.Util;
-using Smn.Response.Sms;
 using Newtonsoft.Json;
+using Smn.Http;
+using Smn.Response.Sms;
+using Smn.Util;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace Smn.Request.Sms
 {
     ///<summary> 
-    /// smn batch publish with diff message request
+    /// promotion smn batch publish with diff message request
     /// author:zhangyx
-    /// version:1.0.3
+    /// version:1.0.4
     ///</summary> 
-    public class SmsBatchPublishWithDiffMessageRequest : AbstractRequest<SmsBatchPublishWithDiffMessageResponse>
+    public class PromotionSmsPublishWithDiffMessageRequest : AbstractRequest<PromotionSmsPublishWithDiffMessageResponse>
     {
         /// <summary>
         /// sms_message
         /// </summary>
-        private List<SmsPublishMessage> smsMessages;
+        private List<PromotionSmsPublishMessage> smsMessages;
 
         [JsonProperty("sms_message")]
-        public List<SmsPublishMessage> SmsMessages { get => smsMessages; set => smsMessages = value; }
+        public List<PromotionSmsPublishMessage> SmsMessages { get => smsMessages; set => smsMessages = value; }
 
         public override HttpMethod GetHttpMethod()
         {
@@ -41,29 +42,20 @@ namespace Smn.Request.Sms
 
         public override string GetUrl()
         {
-            if (smsMessages == null || smsMessages.Count == 0)
-            {
-                throw new ArgumentException("smsMessages is empty");
-            }
-
-            if (smsMessages.Count > ValidateUtil.MAX_SMS_BATCH_PUBLISH_SIZE)
-            {
-                throw new ArgumentException("smsMessages size must be less than 1000");
-            }
-
             StringBuilder sb = new StringBuilder();
             sb.Append(GetSmnServiceUrl());
             sb.Append(Constants.URL_DELIMITER).Append(Constants.V2).Append(Constants.URL_DELIMITER)
                     .Append(ProjectId).Append(Constants.URL_DELIMITER).Append(Constants.SMN_NOTIFICATIONS)
-                    .Append(Constants.URL_DELIMITER).Append(Constants.SMN_SUB_PROTOCOL_BATCH_SMS);
+                    .Append(Constants.URL_DELIMITER).Append(Constants.SMN_SUB_PROTOCOL_SMS)
+                    .Append(Constants.URL_DELIMITER).Append(Constants.SMN_SMS_PROMOTION);
             return sb.ToString();
         }
     }
 
     /// <summary>
-    /// the message data for SmsBatchPublishWithDiffMessageRequest
+    /// the message data for PromotionSmsPublishWithDiffMessageRequest
     /// </summary>
-    public class SmsPublishMessage
+    public class PromotionSmsPublishMessage
     {
         /// <summary>
         /// message access point
