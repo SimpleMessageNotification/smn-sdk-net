@@ -20,7 +20,6 @@ namespace Smn.Example
                "YourPlainPassword",
                "YourRegionName");
 
-
             // if you want to customize the HTTP parameters,
             // or use http proxy, you can use like this
             //ClientConfiguration configuration = new ClientConfiguration
@@ -37,96 +36,100 @@ namespace Smn.Example
             //    "YourPlainPassword",
             //    "YourRegionName",
             //    configuration);
+            MmsDemo mmsDemo = new MmsDemo(smnClient);
+            // send mms
+            // 发送彩信
+            mmsDemo.MmsPublish();
 
-            SmsDemo smsDemo = new SmsDemo(smnClient);
+            smsdemo smsdemo = new smsdemo(smnclient);
             //sms publish
-            smsDemo.SmsPublish();
+            smsdemo.smspublish();
 
             // sms batch pulish
             // 批量发送通知验证码类短信
-            smsDemo.SmsBatchPublish();
+            smsdemo.smsbatchpublish();
 
             // 批量发送不同内容的通知验证码类短信
-            smsDemo.SmsBatchPublishWithDiffMessage();
+            smsdemo.smsbatchpublishwithdiffmessage();
 
             // promotion sms publish
             // 批量发送推广类短信
-            smsDemo.PromotionSmsPublish();
+            smsdemo.promotionsmspublish();
 
             //list sms templates
-            smsDemo.ListSmsTemplates();
+            smsdemo.listsmstemplates();
 
             // create sms template
-            smsDemo.CreateSmsTemplate();
+            smsdemo.createsmstemplate();
 
             // delete sms template
-            smsDemo.DeleteSmsTemplate();
+            smsdemo.deletesmstemplate();
 
             // get sms template detail
-            smsDemo.GetSmsTemplateDetail();
+            smsdemo.getsmstemplatedetail();
 
             // list sms sings
-            smsDemo.ListSmsSigns();
+            smsdemo.listsmssigns();
             // delete sms sign
-            smsDemo.DeleteSmsSign();
+            smsdemo.deletesmssign();
             // list sms msg report
-            smsDemo.ListSmsMsgReport();
+            smsdemo.listsmsmsgreport();
             // get sended sms messsage content
-            smsDemo.GetSmsMessage();
+            smsdemo.getsmsmessage();
             //list sms event
-            smsDemo.ListSmsEvent();
+            smsdemo.listsmsevent();
             //update sms event
-            smsDemo.UpdateSmsEvent();
+            smsdemo.updatesmsevent();
 
-            TopicDemo topicDemo = new TopicDemo(smnClient);
+            topicdemo topicdemo = new topicdemo(smnclient);
             // create topic
-            topicDemo.CreateTopic();
+            topicdemo.createtopic();
             // update topic
-            topicDemo.UpdateTopic();
+            topicdemo.updatetopic();
             // query topic detail
-            topicDemo.QueryTopicDetail();
+            topicdemo.querytopicdetail();
             // list topics
-            topicDemo.ListTopics();
+            topicdemo.listtopics();
             // delete topic
-            topicDemo.DeleteTopic();
+            topicdemo.deletetopic();
             // update topic attribute
-            topicDemo.UpdateTopicAttribute();
+            topicdemo.updatetopicattribute();
             //list topic attributes
-            topicDemo.ListTopicAttributes();
+            topicdemo.listtopicattributes();
             // delete all topic attributes
-            topicDemo.DeleteTopicAttributes();
+            topicdemo.deletetopicattributes();
             // delete topic attribute by name
-            topicDemo.DeleteTopicAttributeByName();
+            topicdemo.deletetopicattributebyname();
 
-            PublishDemo publishDemo = new PublishDemo(smnClient);
+            publishdemo publishdemo = new publishdemo(smnclient);
             // publish message 
-            publishDemo.PublishWithMessage();
+            publishdemo.publishwithmessage();
             // publish with message structure
-            publishDemo.PublishWithMessageStructure();
+            publishdemo.publishwithmessagestructure();
             // publish with message template
-            publishDemo.PublishWithMessageTemplate();
+            publishdemo.publishwithmessagetemplate();
 
-            SubscriptionDemo subscriptionDemo = new SubscriptionDemo(smnClient);
+            subscriptiondemo subscriptiondemo = new subscriptiondemo(smnclient);
             // list subscriptions
-            subscriptionDemo.ListSubscriptions();
+            subscriptiondemo.listsubscriptions();
             // list subscriptions by topic
-            subscriptionDemo.ListSubscriptionsByTopic();
-            // Unsubscribe
-            subscriptionDemo.Unsubscribe();
-            // Subscribe
-            subscriptionDemo.Subscribe();
+            subscriptiondemo.listsubscriptionsbytopic();
+            // unsubscribe
+            subscriptiondemo.unsubscribe();
+            // subscribe
+            subscriptiondemo.subscribe();
 
-            MessageTemplateDemo messageTemplateDemo = new MessageTemplateDemo(smnClient);
+            messagetemplatedemo messagetemplatedemo = new messagetemplatedemo(smnclient);
             // create message template
-            messageTemplateDemo.CreateMessageTemplate();
+            messagetemplatedemo.createmessagetemplate();
             // delete message template 
-            messageTemplateDemo.DeleteMessageTemplate();
+            messagetemplatedemo.deletemessagetemplate();
             // update message template
-            messageTemplateDemo.UpdateMessageTemplate();
+            messagetemplatedemo.updatemessagetemplate();
             // list message templates
-            messageTemplateDemo.ListMessageTemplates();
+            messagetemplatedemo.listmessagetemplates();
             // query message template detail 
-            messageTemplateDemo.QueryMessageTemplateDetail();
+            messagetemplatedemo.querymessagetemplatedetail();
         }
     }
 }
