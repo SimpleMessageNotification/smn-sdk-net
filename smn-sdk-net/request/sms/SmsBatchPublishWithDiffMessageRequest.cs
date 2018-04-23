@@ -46,7 +46,7 @@ namespace Smn.Request.Sms
                 throw new ArgumentException("smsMessages is empty");
             }
 
-            if(smsMessages.Count > ValidateUtil.MAX_SMS_BATCH_PUBLISH_SIZE)
+            if (smsMessages.Count > ValidateUtil.MAX_SMS_BATCH_PUBLISH_SIZE)
             {
                 throw new ArgumentException("smsMessages size must be less than 1000");
             }
@@ -85,6 +85,16 @@ namespace Smn.Request.Sms
         /// </summary>
         private bool messageIncludeSignFlag = false;
 
+        /// <summary>
+        /// extend_code
+        /// </summary>
+        private string extendCode;
+
+        /// <summary>
+        /// extend_src_id
+        /// </summary>
+        private string extendSrcId;
+
         [JsonProperty("endpoint")]
         public string Endpoint { get => endpoint; set => endpoint = value; }
         [JsonProperty("message")]
@@ -93,5 +103,9 @@ namespace Smn.Request.Sms
         public string SignId { get => signId; set => signId = value; }
         [JsonProperty("message_include_sign_flag")]
         public bool MessageIncludeSignFlag { get => messageIncludeSignFlag; set => messageIncludeSignFlag = value; }
+        [JsonProperty("extend_code")]
+        public string ExtendCode { get => extendCode; set => extendCode = value; }
+        [JsonProperty("extend_src_id")]
+        public string ExtendSrcId { get => extendSrcId; set => extendSrcId = value; }
     }
 }

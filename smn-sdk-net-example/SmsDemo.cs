@@ -30,12 +30,17 @@ namespace Smn.Example
                 SignId = "6be340e91e5241e4b5d85837e6709104",
                 // 发送手机号码 号码格式 (+)(国家码)(手机号码)
                 Endpoint = "86136*****87",
-                Message = "【华为企业云】您的验证码是:12345，请查收"
+                Message = "【华为企业云】您的验证码是:12345，请查收",
+                // 可选字段，扩展码，短信状态通知时会返回
+                //ExtendCode = "extendCodeTest",
+                // 可选字段，短信发送方号码的扩展字段，仅限可自定义扩展的签名使用
+                //ExtendSrcId = "123"
             };
             try
             {
                 // 发送请求并返回响应
                 SmsPublishResponse response = smnClient.SendRequest(request);
+                Console.WriteLine(request.GetBodyParams());
                 string result = response.MessageId;
                 Console.WriteLine("{0}， {1}", result, response.ErrMessage);
                 Console.ReadLine();
@@ -68,7 +73,11 @@ namespace Smn.Example
                 // 短信签名,需要在消息通知服务的自助页面申请签名，申请办理时间约2天
                 SignId = "6be340e91e5241e4b5d85837e6709104",
                 Endpoints = endpoints,
-                Message = "你好，您的验证码是:12345679，请查收"
+                Message = "你好，您的验证码是:12345679，请查收",
+                // 可选字段，扩展码，短信状态通知时会返回
+                //ExtendCode = "extendCodeTest",
+                // 可选字段，短信发送方号码的扩展字段，仅限可自定义扩展的签名使用
+                //ExtendSrcId = "123"
             };
             try
             {
@@ -106,7 +115,11 @@ namespace Smn.Example
                 // 短信签名,需要在消息通知服务的自助页面申请签名，申请办理时间约2天
                 SignId = "3fe9fae14729495990cf1a3218fe2aca",
                 Endpoint = "86136*****87",
-                Message = "你好，您的验证码是:12345679，请查收"
+                Message = "你好，您的验证码是:12345679，请查收",
+                // 可选字段，扩展码，短信状态通知时会返回
+                //ExtendCode = "extendCodeTest",
+                // 可选字段，短信发送方号码的扩展字段，仅限可自定义扩展的签名使用
+                //ExtendSrcId = "123"
             };
 
             SmsPublishMessage smsPublishMessage2 = new SmsPublishMessage()
@@ -173,7 +186,11 @@ namespace Smn.Example
                 Endpoints = endpoints,
                 // 短信签名必填,需要在消息通知服务的自助页面申请签名，申请办理时间约2天
                 SignId = "47f86cf7c9a7449d98ee61cf193a1060",
-                SmsTemplateId = "bfda25c6406e42ddabad74b4a20f6d05"
+                SmsTemplateId = "bfda25c6406e42ddabad74b4a20f6d05",
+                // 可选字段，扩展码，短信状态通知时会返回
+                //ExtendCode = "extendCodeTest",
+                // 可选字段，短信发送方号码的扩展字段，仅限可自定义扩展的签名使用
+                //ExtendSrcId = "123"
             };
             try
             {

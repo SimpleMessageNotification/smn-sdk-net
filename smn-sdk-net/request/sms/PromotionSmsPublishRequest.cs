@@ -41,12 +41,26 @@ namespace Smn.Request.Sms
         /// </summary>
         private string signId;
 
+        /// <summary>
+        /// extend_code
+        /// </summary>
+        private string extendCode;
+
+        /// <summary>
+        /// extend_src_id
+        /// </summary>
+        private string extendSrcId;
+
         [JsonProperty("endpoints")]
         public List<string> Endpoints { get => endpoints; set => endpoints = value; }
         [JsonProperty("sms_template_id")]
         public string SmsTemplateId { get => smsTemplateId; set => smsTemplateId = value; }
         [JsonProperty("sign_id")]
         public string SignId { get => signId; set => signId = value; }
+        [JsonProperty("extend_code")]
+        public string ExtendCode { get => extendCode; set => extendCode = value; }
+        [JsonProperty("extend_src_id")]
+        public string ExtendSrcId { get => extendSrcId; set => extendSrcId = value; }
 
         public override HttpMethod GetHttpMethod()
         {
